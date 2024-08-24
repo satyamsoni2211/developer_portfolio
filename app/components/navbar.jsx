@@ -10,7 +10,7 @@ function Navbar() {
           <Link
             href="/"
             className=" text-[#16f2b3] text-3xl font-bold">
-            ABU SAID
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">SATYAM SONI</span>
           </Link>
         </div>
 

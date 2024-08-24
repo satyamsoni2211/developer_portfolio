@@ -72,6 +72,10 @@ import vuetifyjs from '/public/svg/skills/vuetifyjs.svg';
 import webix from '/public/svg/skills/webix.svg';
 import wolframalpha from '/public/svg/skills/wolframalpha.svg';
 import wordpress from '/public/svg/skills/wordpress.svg';
+import fastapi from '/public/svg/skills/fastapi.svg';
+import airflow from '/public/svg/skills/airflow.svg';
+import sqlalchemy from '/public/svg/skills/sqlalchemy.svg';
+import flask from '/public/svg/skills/flask.svg';
 
 
 export const skillsImage = (skill) => {
@@ -79,6 +83,14 @@ export const skillsImage = (skill) => {
   switch (skillID) {
     case 'gcp':
       return gcp;
+    case 'fastapi':
+      return fastapi;
+    case 'airflow':
+      return airflow;
+    case 'sqlalchemy':
+      return sqlalchemy;
+    case 'flask':
+      return flask;
     case 'html':
       return html;
     case 'photoshop':

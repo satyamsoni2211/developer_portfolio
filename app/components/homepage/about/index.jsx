@@ -19,7 +19,7 @@ function AboutSection() {
             Who I am?
           </p>
           <p className="text-gray-200 text-sm lg:text-lg">
-            {personalData.description}
+          My name is <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-indigo-500 ">SATYAM SONI</span>. {personalData.description}
           </p>
         </div>
         <div className="flex justify-center order-1 lg:order-2">
