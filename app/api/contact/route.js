@@ -6,6 +6,8 @@ export async function POST(request) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chat_id = process.env.TELEGRAM_CHAT_ID;
 
+  console.log(payload, token, chat_id);
+
   if (!token || !chat_id) {
     return NextResponse.json({
       success: false,

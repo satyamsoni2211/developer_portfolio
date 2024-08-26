@@ -27,8 +27,8 @@ function AboutSection() {
             src={personalData.profile}
             width={280}
             height={280}
-            alt="Abu Said"
-            className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
+            alt="Satyam Soni"
+            className="rounded-full transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
           />
         </div>
       </div>

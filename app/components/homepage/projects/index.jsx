@@ -30,6 +30,12 @@ const Projects = () => {
           ))}
         </div>
       </div>
+      <div className='pt-24 w-full '>
+        <p className='text-center font-sans text-2xl antialiased'>
+          And many more projects ...
+        </p>
+        <div className='h-[1px] w-1/2 m-auto mt-2 bg-gradient-to-r from-pink-500 transform translate-x-[1px] to-blue-500'></div>
+      </div>
     </div>
   );
 };
