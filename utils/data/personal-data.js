@@ -2,7 +2,7 @@ export const personalData = {
   name: "SATYAM SONI",
   profile: '/profile.png',
   designation: "Technology lead",
-  description: "As a seasoned technology specialist with 8+ years of experience, I excel in delivering highly optimized, cost-efficient, and resilient solutions. My approach remains technology-agnostic, enabling me to leverage the best tools and paradigms to meet client requirements. Passionate about innovation, I drive excellence in every project.",
+  description: "I am a seasoned technology specialist with 8+ years of experience, I excel in delivering highly optimized, cost-efficient, and resilient solutions. My approach remains technology-agnostic, enabling me to leverage the best tools and paradigms to meet client requirements. Passionate about innovation, I drive excellence in every project.",
   email: 'satyamsoni@hotmail.co.uk',
   phone: '+91-7697066634',
   address: 'Indore, Madhya Pradesh',

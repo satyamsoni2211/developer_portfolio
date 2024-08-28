@@ -30,7 +30,7 @@ function HeroSection() {
             Hello, <br />
             This is {' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">{personalData.name}</span>
-            {` , I'm a Professional `}
+            {` , I'm `}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500">{personalData.designation}</span>
             .
           </h1>

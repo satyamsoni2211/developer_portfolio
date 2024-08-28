@@ -15,6 +15,6 @@ export const educations = [
     id: 3,
     title: "Secondary School Certificate",
     duration: "2008 - 2009",
-    institution: "Vindhyacha Academy",
+    institution: "Vindhyachal Academy",
   }
 ]
