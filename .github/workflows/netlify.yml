@@ -17,7 +17,7 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-      - run: npx netlify-cli deploy --prod --dir=.next --debug
+      - run: npx netlify-cli deploy --build --prod --debug
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
