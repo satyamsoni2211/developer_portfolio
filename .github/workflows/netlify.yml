@@ -13,7 +13,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-      - run: npx netlify-cli deploy --prod --dir=.next -b=main --build --debug
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - run: npx netlify-cli deploy --prod --dir=.next --debug
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
