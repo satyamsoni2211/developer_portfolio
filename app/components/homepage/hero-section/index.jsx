@@ -115,9 +115,9 @@ function HeroSection() {
                     skillsData.map((skill, i) => (
                       <React.Fragment key={i}>
                         <span className="text-amber-300">
-                        <span className="text-gray-400">'</span>
+                        <span className="text-gray-400">&apos;</span>
                           {skill.replace(/\s/g, '')}
-                        <span className="text-gray-400">',</span>
+                        <span className="text-gray-400">&apos;,</span>
                           </span>
                         
                       </React.Fragment>
