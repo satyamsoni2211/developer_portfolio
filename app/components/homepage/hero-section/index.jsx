@@ -1,7 +1,9 @@
 // @flow strict
+'use client'
 
 import * as React from 'react';
-
+import Typed from 'typed.js';
+import {useRef, useEffect} from 'react'
 
 import { personalData } from "@/utils/data/personal-data";
 import { skillsData } from "@/utils/data/skills";
@@ -14,6 +16,23 @@ import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
 
 function HeroSection() {
+  const typedRef = useRef(null);
+  useEffect(() => {
+    const typed = new Typed(typedRef.current, {
+      strings: [
+        'Technology Lead',
+        'Full Stack Developer',
+        'Python Enthusiast',
+        'Team Player',
+      ],
+      typeSpeed: 100,
+      backSpeed: 100,
+      loop: true,
+    });
+    return () => {
+      typed.destroy();
+    }
+  },[]);
   return (
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
       <Image
@@ -30,8 +49,8 @@ function HeroSection() {
             Hello, <br />
             This is {' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">{personalData.name}</span>
-            {` , I'm `}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500">{personalData.designation}</span>
+            {` , I'm a `}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500" ref={typedRef}></span>
             .
           </h1>
 
