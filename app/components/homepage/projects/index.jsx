@@ -18,7 +18,7 @@ const Projects = () => {
       <div className="pt-24">
         <div className="flex flex-col gap-6">
           {projectsData.slice(0, 4).map((project, index) => (
-            <BlurOnScroll key={index} name={project.name}>
+            <BlurOnScroll key={index} name={project.name} isBig>
               <div
                 id={`sticky-card-${index + 1}`}
                 key={index}

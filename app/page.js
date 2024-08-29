@@ -32,7 +32,7 @@ export default async function Home() {
 
   return (
     <>
-      <BlurOnScroll>
+      <BlurOnScroll isBig>
         <HeroSection />
       </BlurOnScroll>
       <BlurOnScroll>
@@ -43,10 +43,10 @@ export default async function Home() {
         <Skills />
       </BlurOnScroll>
       <Projects />
-      <BlurOnScroll name="Education">
+      <BlurOnScroll name="Education" isBug>
         <Education />
       </BlurOnScroll>
-      <BlurOnScroll>
+      <BlurOnScroll isBig>
         <Blog blogs={blogs} />
       </BlurOnScroll>
       <BlurOnScroll>
