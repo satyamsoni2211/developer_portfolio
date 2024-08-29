@@ -3,7 +3,6 @@
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 
-
 function AboutSection() {
   return (
     <div id="about" className="my-12 lg:my-16 relative">
@@ -19,7 +18,11 @@ function AboutSection() {
             Who I am?
           </p>
           <p className="text-gray-200 text-sm lg:text-lg">
-          My name is <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-indigo-500 ">SATYAM SONI</span>. {personalData.description}
+            My name is{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-indigo-500 ">
+              SATYAM SONI
+            </span>
+            . {personalData.description}
           </p>
         </div>
         <div className="flex justify-center order-1 lg:order-2">
@@ -34,6 +37,6 @@ function AboutSection() {
       </div>
     </div>
   );
-};
+}
 
 export default AboutSection;

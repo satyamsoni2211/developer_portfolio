@@ -4,6 +4,7 @@
 import * as React from 'react';
 import Typed from 'typed.js';
 import {useRef, useEffect} from 'react'
+import { Fade } from "react-awesome-reveal";
 
 import { personalData } from "@/utils/data/personal-data";
 import { skillsData } from "@/utils/data/skills";
@@ -34,6 +35,7 @@ function HeroSection() {
     }
   },[]);
   return (
+    <Fade cascade>
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
       <Image
         src="/hero.svg"
@@ -202,6 +204,7 @@ function HeroSection() {
         </div>
       </div>
     </section>
+    </Fade>
   );
 };
 

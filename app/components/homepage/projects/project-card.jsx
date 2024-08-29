@@ -79,7 +79,7 @@ function ProjectCard({ project }) {
         alt="Hero"
         width={500}
         height={300}
-        className='m-auto py-2 rounded-2xl hover:transform hover:scale-110 cursor-pointer hover:ease-in hover:duration-700 duration-700'
+        className='m-auto py-2 rounded-2xl hover:transform hover:scale-110 cursor-pointer hover:ease-in hover:duration-700 duration-700 w-11/12 lg:w-full lg:p-[10px] md:w-full md:p-[10px] xl:w-full xl:p-[10px]'
       />
       }
     </div>
