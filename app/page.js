@@ -38,9 +38,7 @@ export default async function Home() {
       <BlurOnScroll>
         <AboutSection />
       </BlurOnScroll>
-      <BlurOnScroll isBig>
-        <Experience />
-      </BlurOnScroll>
+      <Experience />
       <BlurOnScroll name="Skills">
         <Skills />
       </BlurOnScroll>
