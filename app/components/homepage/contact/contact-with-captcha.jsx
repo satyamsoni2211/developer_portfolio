@@ -2,12 +2,13 @@
 // @flow strict
 import { isValidEmail } from "@/utils/check-email";
 import emailjs from "@emailjs/browser";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { TbMailForward } from "react-icons/tb";
 import { toast } from "react-toastify";
 
 function ContactWithCaptcha() {
+  const captchaRef = useRef(null);
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -57,6 +58,7 @@ function ContactWithCaptcha() {
           message: "",
         });
         setCaptcha(null);
+        captchaRef.current.reset();
       }
     } catch (error) {
       console.log(error);
@@ -124,6 +126,7 @@ function ContactWithCaptcha() {
             />
           </div>
           <ReCAPTCHA
+            ref={captchaRef}
             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
             onChange={(code) => setCaptcha(code)}
           />
