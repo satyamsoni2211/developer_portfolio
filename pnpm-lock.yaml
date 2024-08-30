@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@emailjs/browser':
-        specifier: ^4.3.1
+        specifier: ^4.4.1
         version: 4.4.1
       '@emotion/react':
         specifier: ^11.13.3
