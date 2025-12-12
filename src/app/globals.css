@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  background-color: #f5f5f7;
+  color: #0b0b0f;
+  scroll-behavior: smooth;
+}
+
+/* Simple fade/slide utility for when JS is disabled */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Nice subtle “Apple-ish” background */
+body {
+  background: radial-gradient(circle at top, #ffffff 0, #f5f5f7 52%, #e5e7eb 100%);
+}
+
+/* Custom underline for section titles */
+.section-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-label::after {
+  content: "";
+  height: 1px;
+  width: 56px;
+  background: linear-gradient(to right, #d1d5db, transparent);
+}
