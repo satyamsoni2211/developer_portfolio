@@ -1,0 +1,217 @@
+/* Terminal-specific animations and effects */
+
+/* Enhanced cursor blink */
+.terminal-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Glow effects */
+.terminal-glow {
+  text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00;
+}
+
+.terminal-glow-cyan {
+  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+}
+
+/* Scanline effect */
+.terminal-scanline {
+  position: relative;
+}
+
+.terminal-scanline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 255, 0, 0.03) 50%,
+    rgba(0, 255, 0, 0.03)
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border-left: 1px solid #00ff00;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00cc00;
+}
+
+::-webkit-scrollbar-corner {
+  background: #0a0a0a;
+}
+
+/* Selection styling */
+::selection {
+  background: #00ff00;
+  color: #000000;
+}
+
+::-moz-selection {
+  background: #00ff00;
+  color: #000000;
+}
+
+/* Link hover effects */
+.terminal-link {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.terminal-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #00ffff;
+  transition: width 0.2s ease;
+}
+
+.terminal-link:hover::after {
+  width: 100%;
+}
+
+/* CRT screen overlay */
+.crt-overlay {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.1) 80%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
+/* Subtle screen flicker */
+@keyframes screenFlicker {
+  0% { opacity: 0.995; }
+  5% { opacity: 0.99; }
+  10% { opacity: 0.985; }
+  15% { opacity: 0.99; }
+  20% { opacity: 0.995; }
+  50% { opacity: 0.99; }
+  80% { opacity: 0.985; }
+  100% { opacity: 0.995; }
+}
+
+.terminal-flicker {
+  animation: screenFlicker 0.15s infinite;
+}
+
+/* Command button hover */
+.command-button {
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.command-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 0, 0.2),
+    transparent
+  );
+  transition: left 0.3s ease;
+}
+
+.command-button:hover::before {
+  left: 100%;
+}
+
+/* Typing effect for output */
+.typing-output {
+  animation: typingFadeIn 0.1s ease-out;
+}
+
+@keyframes typingFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .terminal-window {
+    font-size: 12px;
+  }
+  
+  .terminal-header {
+    font-size: 11px;
+  }
+  
+  .quick-nav button {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+
+/* Focus styles for accessibility */
+input:focus {
+  outline: none;
+}
+
+button:focus-visible {
+  outline: 2px solid #00ff00;
+  outline-offset: 2px;
+}
+
+a:focus-visible {
+  outline: 2px solid #00ffff;
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .crt-overlay,
+  .terminal-scanline::before {
+    display: none;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}

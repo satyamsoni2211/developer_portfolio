@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Satyam Soni's Portfolio - Technical Architect specializing in AI, Cloud Architecture, and Full-Stack Development" />
+    <meta name="keywords" content="Technical Architect, Python, AI, Machine Learning, Cloud, Full-Stack, Generative AI, LLM, GraphRAG" />
+    <meta name="author" content="Satyam Soni" />
+    <meta name="theme-color" content="#000000" />
+    <meta property="og:title" content="Satyam Soni's Portfolio - Technical Architect" />
+    <meta property="og:description" content="Technical Architect with 9+ years experience in AI, Cloud, and Full-Stack Development" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Satyam Soni's Portfolio" />
+    <meta name="twitter:description" content="Technical Architect | AI Specialist | Cloud Expert" />
+    <title>Satyam Soni's Portfolio - Technical Architect</title>
+    <style>
+      /* Critical CSS for initial load */
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #000000;
+        color: #00ff00;
+        font-family: 'Courier New', Courier, monospace;
+      }
+      
+      /* Preload animation */
+      #preload {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      
+      #preload.hidden {
+        display: none;
+      }
+      
+      .preload-text {
+        color: #00ff00;
+        font-size: 14px;
+        animation: pulse 1s ease-in-out infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="preload">
+      <div class="preload-text">Initializing terminal...</div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Hide preload when app loads
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          document.getElementById('preload').classList.add('hidden');
+        }, 500);
+      });
+    </script>
+  </body>
+</html>

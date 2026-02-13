@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radius: 0.625rem;
+  --background: #0a0a0a;
+  --foreground: #00ff00;
+  --card: #0a0a0a;
+  --card-foreground: #00ff00;
+  --popover: #0a0a0a;
+  --popover-foreground: #00ff00;
+  --primary: #00ff00;
+  --primary-foreground: #000000;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #00ff00;
+  --muted: #1a1a1a;
+  --muted-foreground: #00cc00;
+  --accent: #00cc00;
+  --accent-foreground: #000000;
+  --destructive: #ff3333;
+  --border: #00ff00;
+  --input: #1a1a1a;
+  --ring: #00ff00;
+  --chart-1: #00ff00;
+  --chart-2: #00cc00;
+  --chart-3: #009900;
+  --chart-4: #006600;
+  --chart-5: #003300;
+  --sidebar: #0a0a0a;
+  --sidebar-foreground: #00ff00;
+  --sidebar-primary: #00ff00;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #1a1a1a;
+  --sidebar-accent-foreground: #00ff00;
+  --sidebar-border: #00ff00;
+  --sidebar-ring: #00ff00;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+/* Terminal-specific styles */
+.terminal-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.terminal-glow {
+  text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+}
+
+.terminal-scanline {
+  position: relative;
+}
+
+.terminal-scanline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 255, 0, 0.03) 50%,
+    rgba(0, 255, 0, 0.03)
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Scrollbar styling for terminal */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border-left: 1px solid #00ff00;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ff00;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00cc00;
+}
+
+::-webkit-scrollbar-corner {
+  background: #0a0a0a;
+}
+
+/* Selection styling */
+::selection {
+  background: #00ff00;
+  color: #000000;
+}
+
+::-moz-selection {
+  background: #00ff00;
+  color: #000000;
+}
+
+/* Typing animation */
+.typing-effect {
+  overflow: hidden;
+  white-space: pre-wrap;
+}
+
+/* Command highlight */
+.command-highlight {
+  color: #00ffff;
+}
+
+/* Error styling */
+.error-text {
+  color: #ff3333;
+}
+
+/* Success styling */
+.success-text {
+  color: #00ff00;
+}
+
+/* Warning styling */
+.warning-text {
+  color: #ffff00;
+}
+
+/* Link styling in terminal */
+.terminal-link {
+  color: #00ffff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.terminal-link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 5px #00ffff;
+}
+
+/* CRT screen effect */
+.crt-overlay {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.1) 80%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  pointer-events: none;
+}
+
+/* Flicker effect */
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.95; }
+  20% { opacity: 0.99; }
+  50% { opacity: 0.95; }
+  80% { opacity: 0.9; }
+  100% { opacity: 0.97; }
+}
+
+.terminal-flicker {
+  animation: flicker 0.15s infinite;
+}
+
+/* Command button hover */
+.command-button {
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.command-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 0, 0.2),
+    transparent
+  );
+  transition: left 0.3s ease;
+}
+
+.command-button:hover::before {
+  left: 100%;
+}
+
+/* Typing effect for output */
+.typing-output {
+  animation: typingFadeIn 0.1s ease-out;
+}
+
+@keyframes typingFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Focus styles for accessibility */
+input:focus {
+  outline: none;
+}
+
+button:focus-visible {
+  outline: 2px solid #00ff00;
+  outline-offset: 2px;
+}
+
+a:focus-visible {
+  outline: 2px solid #00ffff;
+  outline-offset: 2px;
+}
