@@ -8,11 +8,11 @@
 
 **A modern, interactive developer portfolio template** where visitors navigate your profile exactly like a real terminal — `cd projects`, `ls skills`, `cat experience.txt` and more!
 
-Stand out instantly from boring scrollable portfolios. Built with React 19, TypeScript, Tailwind CSS, Vite, Framer Motion & Radix UI.
+Stand out instantly from boring scrollable portfolios. Built with React 19, TypeScript, Tailwind CSS & Vite.
 
 **[🔗 Live Demo](https://www.satyamsoni.com)** • **[⭐ Star the Repo](https://github.com/satyamsoni2211/developer_portfolio)** • **[Fork & Use as Template](https://github.com/satyamsoni2211/developer_portfolio/fork)**
 
-![Terminal Demo](thumbnails/terminal-demo.gif)
+![Terminal Demo](thumbnails/screen.png)
 
 > _Tip: Record a quick 10–15 second GIF of someone typing `cd projects` → `ls` → `cat ...` and replace the image above. It dramatically increases engagement on GitHub._
 
@@ -20,12 +20,13 @@ Stand out instantly from boring scrollable portfolios. Built with React 19, Type
 
 - 🖥️ Full terminal-like experience with **tab completion**, **command history**, and classic commands
 - 🌐 Every portfolio section is a "directory" you can `cd` into
-- 📱 Fully responsive + automatic dark/light mode support
-- 💼 Filterable & categorized projects showcase with tech badges
-- 🛠️ Beautiful skills section with icons and proficiency levels
-- 📧 Validated contact form (React Hook Form + Zod)
-- ♿ Accessible (WCAG compliant) & SEO-friendly
+- 📱 Fully responsive design
+- 🌑 **Dark mode only** - Classic terminal aesthetic with CRT scanline effects
+- 💼 Professional experience & projects showcase
+- 🛠️ Comprehensive skills section organized by category
+- ♿ Accessible & SEO-friendly
 - ⚡ Lightning fast thanks to Vite + modern React
+- 🎮 Boot sequence animation for authentic terminal feel
 
 ## 🖥️ Terminal Commands Cheat Sheet
 
@@ -34,18 +35,18 @@ satyam@portfolio:~$ help
 # Shows this exact command list
 ```
 
-| Command         | What it does                      | Example                     |
-| --------------- | --------------------------------- | --------------------------- |
-| `help`          | List all available commands       | `help`                      |
-| `ls` / `dir`    | Show available sections & files   | `ls`                        |
-| `cd <section>`  | Navigate to a section             | `cd projects`               |
-| `cd ..`         | Go back to parent directory       | `cd ..`                     |
-| `pwd`           | Print current working directory   | `pwd`                       |
-| `cat <file>`    | Display file contents             | `cat about.txt`             |
-| `whoami`        | Show your personal info           | `whoami`                    |
-| `clear` / `cls` | Clear the terminal screen         | `clear`                     |
-| `history`       | Show previous commands            | `history`                   |
-| `neofetch`      | Display stylized system/info card | `neofetch` (fun easter egg) |
+| Command           | What it does                        | Example                     |
+| ----------------- | ----------------------------------- | --------------------------- |
+| `help`           | List all available commands         | `help`                      |
+| `ls`             | Show available sections & files     | `ls`                        |
+| `cd <section>`   | Navigate to a section              | `cd projects`               |
+| `cd ..`          | Go back to home directory          | `cd ..`                     |
+| `pwd`            | Print current working directory    | `pwd`                       |
+| `cat <file>`     | Display file contents              | `cat about.txt`             |
+| `whoami`         | Show your personal info            | `whoami`                    |
+| `clear` / `cls`  | Clear the terminal screen          | `clear`                     |
+| `history`        | Show previous commands             | `history`                   |
+| `exit` / `logout`| Close the terminal session        | `exit`                      |
 
 **Pro moves**: Press **Tab** to autocomplete • Use **↑ / ↓** arrows for command history
 
@@ -75,51 +76,80 @@ npm run build
 
 ## 🛠️ Personalization (takes ~5–10 minutes)
 
-All important content lives in these files:
+All important content lives in **`src/App.tsx`** in the `PORTFOLIO_DATA` constant:
 
-| File                  | What to change                                        |
-| --------------------- | ----------------------------------------------------- |
-| `src/lib/config.ts`   | Name, tagline, bio, social links, email, prompt style |
-| `src/lib/projects.ts` | Your projects (title, desc, tech, links, image)       |
-| `src/lib/skills.ts`   | Tech stack, icons, proficiency levels                 |
-| `public/images/`      | Add your project screenshots & profile pic            |
+| Field           | What to change                                        |
+| --------------- | ----------------------------------------------------- |
+| `name`          | Your name                                            |
+| `role`          | Your job title                                       |
+| `location`      | Your location                                        |
+| `email`         | Your email address                                   |
+| `github`        | Your GitHub profile URL                              |
+| `linkedin`      | Your LinkedIn profile URL                            |
+| `website`       | Your personal website                                |
+| `bio`           | Your biography                                       |
+| `skills`        | Technical skills organized by category               |
+| `experience`    | Work history (company, role, period, description)  |
+| `education`     | Education details                                    |
+| `projects`      | Featured projects with tech stack                   |
+| `contact`       | Contact information                                  |
 
-**Example – adding a project** (`src/lib/projects.ts`):
+**Example – editing your info** (`src/App.tsx`):
 
-```ts
-export const projects = [
-  {
-    title: "TaskFlow – Smart Todo App",
-    description: "AI-powered task manager with natural language input",
-    tech: ["React", "TypeScript", "Tailwind", "Supabase"],
-    liveUrl: "https://taskflow.example.com",
-    githubUrl: "https://github.com/username/taskflow",
-    image: "/images/taskflow-preview.png",
+```tsx
+const PORTFOLIO_DATA = {
+  name: 'Your Name',
+  role: 'Full Stack Developer',
+  location: 'New York, USA',
+  email: 'you@example.com',
+  github: 'https://github.com/yourusername',
+  linkedin: 'https://linkedin.com/in/yourusername',
+  website: 'https://yourwebsite.com',
+  bio: `Your bio here...`,
+  skills: {
+    languages: ['JavaScript', 'TypeScript', 'Python'],
+    frameworks: ['React', 'Node.js', 'Express'],
+    // ... more categories
   },
-  // ...
-];
+  // ... more fields
+};
 ```
 
-## 🚀 One-Click Deployment Options
-
-- **Vercel** (recommended) → Connect GitHub repo → Deploy
-- **Netlify** → Drag & drop or connect repo (netlify.toml included)
-- **GitHub Pages** → Works after build
-
-## 📁 Folder Structure Overview
+## 📁 Folder Structure
 
 ```
 src/
-├── components/
-│   └── terminal/           ← core terminal + command handlers
-├── lib/
-│   ├── config.ts           ← ← most important file!
-│   ├── projects.ts
-│   └── skills.ts
+├── App.tsx              ← Main app with PORTFOLIO_DATA + terminal logic
+├── App.css              ← Terminal-specific styling
+├── main.tsx             ← Entry point
+├── index.css            ← Global styles
 ├── hooks/
-├── styles/
-└── App.tsx
+│   └── use-mobile.ts    ← Mobile detection hook
+└── components/
+    └── ui/              ← Reusable UI components (from shadcn/ui)
 ```
+
+## 🚀 Deployment
+
+The project includes GitHub Actions workflows for automatic deployment to Vercel:
+
+| Workflow          | Trigger        | Description           |
+| ----------------- | -------------- | --------------------- |
+| `vercel.yml`     | Push to `main`| Production deployment |
+| `vercel-preview.yml` | PRs        | Preview deployments  |
+
+### Vercel Setup
+
+1. Create a Vercel account and connect your GitHub repository
+2. Generate a Vercel token: [Account Settings → Tokens](https://vercel.com/account/tokens)
+3. Add these **GitHub Secrets**:
+   - `VERCEL_TOKEN` - Your Vercel access token
+   - `VERCEL_ORG_ID` - Run `vercel link` locally to get this
+   - `VERCEL_PROJECT_ID` - Run `vercel link` locally to get this
+
+### Alternative: Netlify
+
+The project also includes a Netlify workflow at `.github/workflows/netlify.yml`.
 
 ## 🤝 Contributing
 
