@@ -1,172 +1,140 @@
-# Developer Portfolio
+# 🖥️ Developer Terminal Portfolio
 
-<p align="center">
-  <img src="thumbnails/screen.png" alt="Portfolio Screenshot" width="800"/>
-</p>
+[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A modern, responsive developer portfolio template built with React, TypeScript, Tailwind CSS, and Vite. Features a unique **terminal-based UI** that lets visitors interact with your portfolio like a developer!
+**A modern, interactive developer portfolio template** where visitors navigate your profile exactly like a real terminal — `cd projects`, `ls skills`, `cat experience.txt` and more!
 
-[**Live Demo**](https://www.satyamsoni.com) &nbsp;
+Stand out instantly from boring scrollable portfolios. Built with React 19, TypeScript, Tailwind CSS, Vite, Framer Motion & Radix UI.
 
----
+**[🔗 Live Demo](https://www.satyamsoni.com)** • **[⭐ Star the Repo](https://github.com/satyamsoni2211/developer_portfolio)** • **[Fork & Use as Template](https://github.com/satyamsoni2211/developer_portfolio/fork)**
+
+![Terminal Demo](thumbnails/terminal-demo.gif)
+
+> _Tip: Record a quick 10–15 second GIF of someone typing `cd projects` → `ls` → `cat ...` and replace the image above. It dramatically increases engagement on GitHub._
 
 ## ✨ Features
 
-- 🖥️ **Terminal-Based Interaction** - Navigate the portfolio using familiar CLI commands
-- 🎨 **Modern UI** - Clean typography with smooth animations
-- 📱 **Fully Responsive** - Looks great on all devices
-- 🌙 **Dark/Light Mode** - Automatic system theme detection
-- 💼 **Projects Showcase** - Filterable projects with detailed cards
-- 🛠️ **Skills Section** - Display your tech stack elegantly
-- 📧 **Contact Form** - Form validation with React Hook Form + Zod
-- ♿ **Accessible** - WCAG compliant components
-- 🔍 **SEO-Friendly** - Optimized for search engines
+- 🖥️ Full terminal-like experience with **tab completion**, **command history**, and classic commands
+- 🌐 Every portfolio section is a "directory" you can `cd` into
+- 📱 Fully responsive + automatic dark/light mode support
+- 💼 Filterable & categorized projects showcase with tech badges
+- 🛠️ Beautiful skills section with icons and proficiency levels
+- 📧 Validated contact form (React Hook Form + Zod)
+- ♿ Accessible (WCAG compliant) & SEO-friendly
+- ⚡ Lightning fast thanks to Vite + modern React
 
----
-
-## 🖥️ Terminal Mode
-
-This portfolio emulates a terminal interface. Users can:
+## 🖥️ Terminal Commands Cheat Sheet
 
 ```bash
-satyam@portfolio:projects$ help
-   === AVAILABLE COMMANDS ===
-   help - Display available commands
-   ls - List sections or files in current directory
-   cd - Change to a section (e.g., cd projects)
-   cat - Display content of a file (e.g., cat about.txt)
-   clear - Clear the terminal screen
-   exit - Close the terminal session
-   whoami - Display user information
-   pwd - Show current directory
-   history - Show command history
-   Tip: Use Tab for auto-completion, Up/Down for command history
-
-satyam@portfolio:projects$ cd projects
-   Navigated to projects/
-
-   === FEATURED PROJECTS ===
+satyam@portfolio:~$ help
+# Shows this exact command list
 ```
 
----
+| Command         | What it does                      | Example                     |
+| --------------- | --------------------------------- | --------------------------- |
+| `help`          | List all available commands       | `help`                      |
+| `ls` / `dir`    | Show available sections & files   | `ls`                        |
+| `cd <section>`  | Navigate to a section             | `cd projects`               |
+| `cd ..`         | Go back to parent directory       | `cd ..`                     |
+| `pwd`           | Print current working directory   | `pwd`                       |
+| `cat <file>`    | Display file contents             | `cat about.txt`             |
+| `whoami`        | Show your personal info           | `whoami`                    |
+| `clear` / `cls` | Clear the terminal screen         | `clear`                     |
+| `history`       | Show previous commands            | `history`                   |
+| `neofetch`      | Display stylized system/info card | `neofetch` (fun easter egg) |
 
-## 🚀 Getting Started
+**Pro moves**: Press **Tab** to autocomplete • Use **↑ / ↓** arrows for command history
 
-### Prerequisites
+## 🚀 Quick Start
 
-- Node.js (v18 or higher)
-- npm or yarn
+### 1. Clone & Install
 
-### Installation
+```bash
+git clone https://github.com/satyamsoni2211/developer_portfolio.git
+cd developer_portfolio
+npm install
+```
 
-1. **Clone the repository:**
+### 2. Development
 
-   ```bash
-   git clone <your-repo-url>
-   cd developer_portfolio
-   ```
+```bash
+npm run dev
+```
 
-2. **Install dependencies:**
+→ Open http://localhost:5173
 
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server:**
-
-   ```bash
-   npm run dev
-   ```
-
-4. **Open** [http://localhost:5173](http://localhost:5173) in your browser
-
-### Building for Production
+### 3. Production Build
 
 ```bash
 npm run build
 ```
 
----
+## 🛠️ Personalization (takes ~5–10 minutes)
 
-## 🌐 Deployment
+All important content lives in these files:
 
-The project includes GitHub Actions workflows for automatic deployment to Vercel:
+| File                  | What to change                                        |
+| --------------------- | ----------------------------------------------------- |
+| `src/lib/config.ts`   | Name, tagline, bio, social links, email, prompt style |
+| `src/lib/projects.ts` | Your projects (title, desc, tech, links, image)       |
+| `src/lib/skills.ts`   | Tech stack, icons, proficiency levels                 |
+| `public/images/`      | Add your project screenshots & profile pic            |
 
-| Workflow             | Trigger        | Description           |
-| -------------------- | -------------- | --------------------- |
-| `vercel.yml`         | Push to `main` | Production deployment |
-| `vercel-preview.yml` | Pull requests  | Preview deployments   |
+**Example – adding a project** (`src/lib/projects.ts`):
 
-### Vercel Setup
+```ts
+export const projects = [
+  {
+    title: "TaskFlow – Smart Todo App",
+    description: "AI-powered task manager with natural language input",
+    tech: ["React", "TypeScript", "Tailwind", "Supabase"],
+    liveUrl: "https://taskflow.example.com",
+    githubUrl: "https://github.com/username/taskflow",
+    image: "/images/taskflow-preview.png",
+  },
+  // ...
+];
+```
 
-1. Create a Vercel account and connect your GitHub repository
-2. Generate a Vercel token: [Account Settings → Tokens](https://vercel.com/account/tokens)
-3. Add these **GitHub Secrets**:
-   - `VERCEL_TOKEN` - Your Vercel access token
-   - `VERCEL_ORG_ID` - Run `vercel link` locally to get this
-   - `VERCEL_PROJECT_ID` - Run `vercel link` locally to get this
+## 🚀 One-Click Deployment Options
 
----
+- **Vercel** (recommended) → Connect GitHub repo → Deploy
+- **Netlify** → Drag & drop or connect repo (netlify.toml included)
+- **GitHub Pages** → Works after build
 
-## 🎨 Customization
+## 📁 Folder Structure Overview
 
-### Update Personal Information
+```
+src/
+├── components/
+│   └── terminal/           ← core terminal + command handlers
+├── lib/
+│   ├── config.ts           ← ← most important file!
+│   ├── projects.ts
+│   └── skills.ts
+├── hooks/
+├── styles/
+└── App.tsx
+```
 
-Edit the configuration files in `src/lib/`:
+## 🤝 Contributing
 
-| File          | Purpose                           |
-| ------------- | --------------------------------- |
-| `config.ts`   | Name, bio, social links, metadata |
-| `projects.ts` | Your projects data                |
-| `skills.ts`   | Skills and technologies           |
+Bug reports, new command ideas, design improvements, or theme suggestions are very welcome!
 
-### Theme Customization
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/amazing-command`)
+3. Commit your changes (`git commit -m 'Add some amazing command'`)
+4. Push to the branch (`git push origin feature/amazing-command`)
+5. Open a Pull Request
 
-- **Colors & Styling:** Modify `tailwind.config.ts`
-- **CSS Variables:** Update `src/index.css`
+## 📜 License
 
-### Adding New Sections
-
-1. Create a new component in `src/components/`
-2. Add it to the main page in `src/App.tsx`
-
----
-
-## 🛠️ Tech Stack
-
-<div align="center">
-
-![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Radix UI](https://img.shields.io/badge/Radix_UI-161618?style=for-the-badge&logo=radix-ui&logoColor=white)
-
-</div>
-
-- [React](https://react.dev/) - UI library
-- [TypeScript](https://www.typescriptlang.org/) - Type safety
-- [Vite](https://vite.dev/) - Build tool
-- [Tailwind CSS](https://tailwindcss.com/) - Styling
-- [Radix UI](https://www.radix-ui.com/) - Accessible components
-- [Framer Motion](https://www.framer.com/motion/) - Animations
+MIT © [Satyam Soni](https://github.com/satyamsoni2211)
 
 ---
 
-## 📸 Screenshots
-
-<p align="center">
-  <img src="thumbnails/about.png" alt="About Section" width="800"/>
-</p>
-
----
-
-## 📄 License
-
-MIT License - Feel free to use this template for your own portfolio!
-
----
-
-<div align="center">
-  Made with ❤️ using React + Vite
-</div>
+Made with ❤️ and way too much time spent typing `cd` instead of clicking
