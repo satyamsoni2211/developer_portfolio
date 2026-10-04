@@ -34,6 +34,7 @@ jobs:
         if: github.event_name == 'push'
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          vercel-version: latest # the action's bundled CLI is too old for Vercel's API (needs >= 47.2.2)
           vercel-args: --prod # Optional
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}} # Required
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}} # Required
