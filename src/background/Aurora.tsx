@@ -44,7 +44,7 @@ export function Aurora({ context }: { context: string }) {
   }, [palette])
 
   useEffect(() => {
-    rendererRef.current?.setStars(dark)
+    rendererRef.current?.setDark(dark)
   }, [dark, webgl])
 
   const showCanvas = !reduce && webgl !== 'off'
@@ -59,7 +59,7 @@ export function Aurora({ context }: { context: string }) {
         <canvas
           ref={canvasRef}
           className="absolute inset-0 h-full w-full transition-opacity duration-1000"
-          style={{ opacity: webgl === 'on' ? (dark ? 1 : 0.38) : 0 }}
+          style={{ opacity: webgl === 'on' ? 1 : 0 }}
         />
       )}
     </div>

@@ -12,6 +12,10 @@ uniform vec3 u_c0;
 uniform vec3 u_c1;
 uniform vec3 u_c2;
 uniform float u_stars;
+uniform float u_maxLum;
+uniform float u_light;
+uniform float u_minLum;
+uniform vec3 u_bg;
 
 float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float noise(vec2 p) {
@@ -45,6 +49,24 @@ void main() {
     col += c * band * rays * (0.8 - fi * 0.17);
   }
   col *= smoothstep(0.05, 0.5, uv.y);
+  vec3 W = vec3(0.2126, 0.7152, 0.0722);
+  if (u_light > 0.5) {
+    // Dawn wash: tint the page background toward the ribbon hue, then lift it back so the page never
+    // drops below u_minLum relative luminance — dark text stays readable wherever the ribbons drift.
+    float m = max(max(col.r, col.g), col.b);
+    vec3 tint = m > 0.0 ? col / m : vec3(0.0);
+    vec3 outc = mix(u_bg, tint, clamp(m, 0.0, 1.0) * 0.55);
+    float L = dot(pow(outc, vec3(2.2)), W);
+    float Lbg = dot(pow(u_bg, vec3(2.2)), W);
+    outc = mix(outc, u_bg, clamp((u_minLum - L) / max(Lbg - L, 1e-4), 0.0, 1.0));
+    gl_FragColor = vec4(outc, 1.0);
+    return;
+  }
+  // Night sky: soft-knee the light's relative luminance (WCAG, linearised) so it never exceeds
+  // u_maxLum yet keeps the ribbons' gradation and hue (a hard clip flattens them into a band).
+  float lum = dot(pow(max(col, vec3(0.0)), vec3(2.2)), W);
+  float target = u_maxLum * (1.0 - exp(-lum / u_maxLum));
+  col *= pow(target / max(lum, 1e-6), 1.0 / 2.2);
   vec2 cell = floor(gl_FragCoord.xy);
   float star = step(0.9965, hash(cell)) * u_stars;
   float twinkle = 0.45 + 0.55 * sin(u_time * 1.7 + hash(cell + 3.1) * 40.0);
@@ -55,12 +77,15 @@ void main() {
 
 export type AuroraRenderer = {
   setPalette: (p: Palette) => void
-  setStars: (on: boolean) => void
+  setDark: (dark: boolean) => void
   destroy: () => void
 }
 
 const SCALE = 0.5 // render at half resolution; the aurora is soft anyway
 const FRAME_MS = 1000 / 30
+/** Text-contrast budgets (WCAG relative luminance), pinned by contrast.test.ts against the text tokens. */
+export const DARK_MAX_LUM = 0.04 // brightest the aurora may get behind text on the night sky
+export const LIGHT_MIN_LUM = 0.84 // darkest the dawn wash may make the page
 
 function compile(gl: WebGLRenderingContext, type: number, src: string) {
   const s = gl.createShader(type)!
@@ -93,12 +118,14 @@ export function createAurora(canvas: HTMLCanvasElement, initial: Palette, onLost
   gl.enableVertexAttribArray(aPos)
   gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0)
   const u = (name: string) => gl.getUniformLocation(program, name)
-  const uRes = u('u_res'), uTime = u('u_time'), uStars = u('u_stars')
+  const uRes = u('u_res'), uTime = u('u_time'), uStars = u('u_stars'), uMaxLum = u('u_maxLum')
+  const uLight = u('u_light'), uMinLum = u('u_minLum'), uBg = u('u_bg')
   const uCols = [u('u_c0'), u('u_c1'), u('u_c2')]
 
   const current = initial.map((c) => [...c]) as Palette
   let target = initial
   let stars = 1
+  let light = 0
   let raf = 0
   let last = 0
   let prevFrame = performance.now()
@@ -126,6 +153,10 @@ export function createAurora(canvas: HTMLCanvasElement, initial: Palette, onLost
     gl.uniform2f(uRes, canvas.width, canvas.height)
     gl.uniform1f(uTime, (now - start) / 1000)
     gl.uniform1f(uStars, stars)
+    gl.uniform1f(uMaxLum, DARK_MAX_LUM)
+    gl.uniform1f(uLight, light)
+    gl.uniform1f(uMinLum, LIGHT_MIN_LUM)
+    gl.uniform3f(uBg, 251 / 255, 251 / 255, 253 / 255)
     current.forEach((c, i) => gl.uniform3f(uCols[i], c[0], c[1], c[2]))
     gl.clearColor(0, 0, 0, 0)
     gl.clear(gl.COLOR_BUFFER_BIT)
@@ -144,8 +175,9 @@ export function createAurora(canvas: HTMLCanvasElement, initial: Palette, onLost
     setPalette: (p) => {
       target = p
     },
-    setStars: (on) => {
-      stars = on ? 1 : 0
+    setDark: (dark) => {
+      stars = dark ? 1 : 0
+      light = dark ? 0 : 1
     },
     destroy: () => {
       cancelAnimationFrame(raf)

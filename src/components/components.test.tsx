@@ -3,6 +3,7 @@ import { afterEach, describe, expect, test, vi } from 'vitest'
 import { copyText } from '@/lib/clipboard'
 import { CountUp, formatMetric } from './CountUp'
 import { Reveal } from './Reveal'
+import { SocialLinks } from './SocialLinks'
 import { ToastProvider, useToast } from './Toast'
 
 afterEach(() => vi.restoreAllMocks())
@@ -56,5 +57,14 @@ describe('Toast', () => {
     )
     await act(async () => fireEvent.click(screen.getByText('go')))
     expect(screen.getByText('Saved')).toBeInTheDocument()
+  })
+})
+
+describe('SocialLinks', () => {
+  test('includes X (Twitter), opening in a new tab', () => {
+    render(<SocialLinks />)
+    const x = screen.getByRole('link', { name: 'X (Twitter)' })
+    expect(x).toHaveAttribute('href', 'https://x.com/_satyamsoni_')
+    expect(x).toHaveAttribute('target', '_blank')
   })
 })

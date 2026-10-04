@@ -1,11 +1,12 @@
 import { Globe, Mail } from 'lucide-react'
 import { profile } from '@/data/profile'
 import { cn } from '@/lib/utils'
-import { GitHubIcon, LinkedInIcon } from './icons'
+import { GitHubIcon, LinkedInIcon, XIcon } from './icons'
 
 const LINKS = [
   { label: 'GitHub', href: profile.github, Icon: GitHubIcon },
   { label: 'LinkedIn', href: profile.linkedin, Icon: LinkedInIcon },
+  { label: 'X (Twitter)', href: profile.x, Icon: XIcon },
   { label: 'Website', href: profile.website, Icon: Globe },
   { label: 'Email', href: `mailto:${profile.email}`, Icon: Mail },
 ]

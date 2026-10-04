@@ -5,6 +5,7 @@ export const profile = {
   email: 'satyamsoni@hotmail.co.uk',
   github: 'https://github.com/satyamsoni2211',
   linkedin: 'https://linkedin.com/in/-satyamsoni',
+  x: 'https://x.com/_satyamsoni_',
   website: 'https://satyamsoni.in',
   pitch: 'I design data platforms, AI systems and the teams that ship them.',
   metaDescription:
