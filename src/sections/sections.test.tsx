@@ -3,6 +3,7 @@ import { describe, expect, test } from 'vitest'
 import { AppProviders } from '@/AppProviders'
 import { About } from './About'
 import { Hero } from './Hero'
+import { GuideProvider } from '@/guide/GuideProvider'
 import { fireEvent } from '@testing-library/react'
 import { Experience, firstSentence } from './Experience'
 import { MemoryRouter } from 'react-router'
@@ -19,7 +20,11 @@ const wrap = (ui: React.ReactNode) => render(<AppProviders>{ui}</AppProviders>)
 
 describe('Hero', () => {
   test('shows name, pitch, CTAs and stats', async () => {
-    wrap(<Hero />)
+    wrap(
+      <GuideProvider context="hero">
+        <Hero />
+      </GuideProvider>,
+    )
     expect(screen.getByRole('heading', { level: 1, name: /Satyam Soni/ })).toBeInTheDocument()
     expect(screen.getByText(/design data platforms, AI systems/)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'View work' })).toBeInTheDocument()

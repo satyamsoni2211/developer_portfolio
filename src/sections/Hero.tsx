@@ -6,6 +6,7 @@ import { RevealGroup, RevealItem } from '@/components/Reveal'
 import { experience } from '@/data/experience'
 import { profile } from '@/data/profile'
 import { projects } from '@/data/projects'
+import { HeroCharacter } from '@/guide/HeroCharacter'
 import { scrollToId } from '@/lib/scroll'
 
 const STATS = [
@@ -56,7 +57,7 @@ export function Hero() {
 
           <dl className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-4">
             {STATS.map((s) => (
-              <div key={s.label} className="flex flex-col-reverse">
+              <div key={s.label} className="flex flex-col-reverse justify-end">
                 <dt className="mt-1 text-sm text-muted">{s.label}</dt>
                 <dd className="text-4xl font-semibold tracking-tight">
                   <CountUp value={s.value} suffix={s.suffix} />
@@ -67,7 +68,7 @@ export function Hero() {
         </motion.div>
 
         <div className="flex justify-center lg:justify-end">
-          <div data-hero-character-slot aria-hidden className="h-[360px] lg:h-[min(72vh,640px)]" style={{ aspectRatio: '750 / 2020' }} />
+          <HeroCharacter />
         </div>
       </div>
     </section>

@@ -153,7 +153,7 @@ export default function ProjectPage() {
         <Block title="Results">
           <dl className="grid gap-4 sm:grid-cols-3">
             {project.metrics.map((m) => (
-              <div key={m.label} className="card flex flex-col-reverse p-6">
+              <div key={m.label} className="card flex flex-col-reverse justify-end p-6">
                 <dt className="mt-2 text-muted">{m.label}</dt>
                 <dd className="text-5xl font-semibold tracking-tight">
                   {'text' in m ? m.text : <CountUp value={m.value} prefix={m.prefix} suffix={m.suffix} />}
