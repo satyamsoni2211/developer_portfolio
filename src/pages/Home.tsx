@@ -6,6 +6,7 @@ import { useDocumentMeta } from '@/lib/useDocumentMeta'
 import { About } from '@/sections/About'
 import { Experience } from '@/sections/Experience'
 import { Hero } from '@/sections/Hero'
+import { Projects } from '@/sections/Projects'
 
 export default function Home() {
   const location = useLocation()
@@ -21,6 +22,7 @@ export default function Home() {
       <Hero />
       <About />
       <Experience />
+      <Projects />
     </main>
   )
 }

@@ -5,6 +5,11 @@ import { About } from './About'
 import { Hero } from './Hero'
 import { fireEvent } from '@testing-library/react'
 import { Experience, firstSentence } from './Experience'
+import { MemoryRouter } from 'react-router'
+import { waitFor } from '@testing-library/react'
+import { projects } from '@/data/projects'
+import { metricText } from '@/components/ProjectCard'
+import { filterProjects, Projects } from './Projects'
 
 const wrap = (ui: React.ReactNode) => render(<AppProviders>{ui}</AppProviders>)
 
@@ -44,5 +49,32 @@ describe('Experience', () => {
     fireEvent.click(toggles[1])
     expect(toggles[1]).toHaveAttribute('aria-expanded', 'true')
     expect(screen.getByText(/Designed fault-tolerant cloud-native architectures on AWS/)).toBeInTheDocument()
+  })
+})
+
+describe('Projects', () => {
+  test('filterProjects', () => {
+    expect(filterProjects(projects, 'all')).toHaveLength(9)
+    expect(filterProjects(projects, 'freelance').map((p) => p.slug)).toEqual(['defect-detection', 'stryve', 'crickbuzz'])
+    expect(filterProjects(projects, 'enterprise')).toHaveLength(6)
+  })
+
+  test('metricText', () => {
+    expect(metricText({ value: 5, prefix: '≤ ', suffix: ' s', label: 'x' })).toBe('≤ 5 s')
+    expect(metricText({ text: 'In-house', label: 'x' })).toBe('In-house')
+  })
+
+  test('cards link to case studies and filtering hides enterprise', async () => {
+    wrap(
+      <MemoryRouter>
+        <Projects />
+      </MemoryRouter>,
+    )
+    expect(screen.getByRole('link', { name: /Stryve/ })).toHaveAttribute('href', '/projects/stryve')
+    expect(screen.getAllByRole('link', { name: /case study/i })).toHaveLength(9)
+    const freelance = screen.getByRole('button', { name: 'Freelance' })
+    fireEvent.click(freelance)
+    expect(freelance).toHaveAttribute('aria-pressed', 'true')
+    await waitFor(() => expect(screen.queryByRole('link', { name: /FUSION/ })).not.toBeInTheDocument(), { timeout: 3000 })
   })
 })
