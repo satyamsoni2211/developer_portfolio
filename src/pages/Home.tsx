@@ -4,6 +4,7 @@ import { profile } from '@/data/profile'
 import { scrollToId } from '@/lib/scroll'
 import { useDocumentMeta } from '@/lib/useDocumentMeta'
 import { About } from '@/sections/About'
+import { Experience } from '@/sections/Experience'
 import { Hero } from '@/sections/Hero'
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
     <main id="main">
       <Hero />
       <About />
+      <Experience />
     </main>
   )
 }
