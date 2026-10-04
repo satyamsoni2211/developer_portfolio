@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
 import { companionTarget, gaze, isAvoidTarget, shouldFollow, tiltFromVelocity } from './geometry'
-import { nextTip, tipFor } from './tips'
+import { nextTip, restTip, tipFor } from './tips'
 
 const vp = { w: 1000, h: 800 }
 
@@ -66,5 +66,15 @@ describe('tips', () => {
     expect(nextTip('skills', shown)).not.toBeNull()
     expect(nextTip('skills', shown)).toBeNull()
     expect(nextTip('nowhere', shown)).toBeNull()
+  })
+})
+
+describe('restTip', () => {
+  test('does not consume the tip while the companion is faded out', () => {
+    const shown = new Set<string>()
+    expect(restTip('experience', shown, false)).toBeNull()
+    expect(shown.has('experience')).toBe(false)
+    expect(restTip('experience', shown, true)).toMatch(/role/)
+    expect(restTip('experience', shown, true)).toBeNull()
   })
 })

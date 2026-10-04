@@ -24,3 +24,8 @@ export function nextTip(context: string, shown: Set<string>): string | null {
   if (tip) shown.add(context)
   return tip
 }
+
+/** Tip for a companion that has come to rest — never consumed while it is faded out (unseen). */
+export function restTip(context: string, shown: Set<string>, visible: boolean): string | null {
+  return visible ? nextTip(context, shown) : null
+}

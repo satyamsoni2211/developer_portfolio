@@ -3,6 +3,7 @@ import { Outlet, ScrollRestoration, useLocation } from 'react-router'
 import { Footer } from '@/components/Footer'
 import { Nav } from '@/components/Nav'
 import { SECTION_IDS } from '@/data/sections'
+import { GuideLayer, GuideNavButton, GuideSkipLink } from '@/guide/GuideLayer'
 import { GuideProvider } from '@/guide/GuideProvider'
 import { startSmoothScroll } from '@/lib/scroll'
 import { useActiveSection } from '@/lib/useActiveSection'
@@ -23,9 +24,11 @@ export function RootLayout() {
       >
         Skip to content
       </a>
-      <Nav active={pathname === '/' ? active : null} />
+      <GuideSkipLink />
+      <Nav active={pathname === '/' ? active : null} extra={<GuideNavButton />} />
       <Outlet />
       <Footer />
+      <GuideLayer />
       <ScrollRestoration />
     </GuideProvider>
   )
