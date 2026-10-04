@@ -1,6 +1,6 @@
 # Satyam Soni — Portfolio
 
-Personal portfolio of **Satyam Soni, Technical Architect** — an Apple-inspired, theme-aware site with a 2D animated guide (Satyam's illustrated character) that follows your cursor and points out what's worth seeing.
+Personal portfolio of **Satyam Soni, Solution Architect** — an Apple-inspired, theme-aware site with a 2D animated guide (Satyam's illustrated character) that follows your cursor and points out what's worth seeing.
 
 **Live:** https://www.satyamsoni.com
 

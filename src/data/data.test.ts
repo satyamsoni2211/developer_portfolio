@@ -5,6 +5,7 @@ import { profile } from './profile'
 import { projects } from './projects'
 import { SECTION_IDS } from './sections'
 import { skillCategories } from './skills'
+import { talks } from './talks'
 
 describe('content data', () => {
   test('has 9 projects in the agreed order with unique slugs', () => {
@@ -48,11 +49,12 @@ describe('content data', () => {
     expect(bySlug['crickbuzz'].models).toEqual(['YOLO26 (custom-trained)'])
   })
 
-  test('5 jobs newest first, 8 skill categories, education present', () => {
+  test('6 jobs newest first, 8 skill categories, education present', () => {
     expect(experience.map((j) => j.company)).toEqual([
-      'SenecaGlobal Solutions Pvt Ltd.', 'HSBC Software Development (India) Pvt. Ltd.',
+      'EPAM India', 'SenecaGlobal Solutions Pvt Ltd.', 'HSBC Software Development (India) Pvt. Ltd.',
       'Infosys Ltd', 'Amdocs Development Centre India LLP', 'Gemini Solutions Pvt Ltd.',
     ])
+    expect(experience[1].period.endsWith('Sep 2025')).toBe(true)
     expect(skillCategories).toHaveLength(8)
     expect(education.school).toBe('Chamelidevi School of Engineering')
   })
@@ -63,7 +65,15 @@ describe('content data', () => {
     expect(text).not.toContain('9+')
   })
 
+  test('talks: 4 workshops, newest first, https links', () => {
+    expect(talks).toHaveLength(4)
+    const years = talks.map((t) => t.year)
+    expect(years).toEqual([...years].sort((a, b) => b - a))
+    expect(talks.every((t) => t.url.startsWith('https://'))).toBe(true)
+    expect(talks.every((t) => t.kind === 'Workshop')).toBe(true)
+  })
+
   test('section ids are fixed', () => {
-    expect(SECTION_IDS).toEqual(['hero', 'about', 'experience', 'projects', 'skills', 'education', 'contact'])
+    expect(SECTION_IDS).toEqual(['hero', 'about', 'experience', 'projects', 'speaking', 'skills', 'education', 'contact'])
   })
 })

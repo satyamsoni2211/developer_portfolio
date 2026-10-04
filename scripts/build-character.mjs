@@ -90,7 +90,7 @@ const text = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" h
   <rect width="1200" height="630" fill="url(#g)"/>
   <g font-family="-apple-system, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif">
     <text x="80" y="270" font-size="92" font-weight="700" letter-spacing="-3" fill="#f5f5f7">Satyam Soni<tspan fill="#2997ff">.</tspan></text>
-    <text x="80" y="340" font-size="36" fill="#a1a1a6">Technical Architect · 10+ years</text>
+    <text x="80" y="340" font-size="36" fill="#a1a1a6">Solution Architect · 10+ years</text>
     <text x="80" y="392" font-size="28" fill="#a1a1a6">Data platforms · AI systems · Computer vision</text>
     <text x="80" y="560" font-size="24" fill="#2997ff">satyamsoni.com</text>
   </g>

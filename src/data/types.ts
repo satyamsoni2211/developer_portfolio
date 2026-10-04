@@ -46,4 +46,14 @@ export type Job = {
   technologies: string[]
 }
 
+export type Talk = {
+  title: string
+  subtitle?: string
+  kind: 'Workshop'
+  event: string
+  year: number
+  city?: string
+  url: string
+}
+
 export type SkillCategory = { id: string; label: string; items: string[] }

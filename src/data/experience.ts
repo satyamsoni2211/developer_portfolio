@@ -2,10 +2,19 @@ import type { Job } from './types'
 
 export const experience: Job[] = [
   {
+    company: 'EPAM India',
+    location: 'India',
+    role: 'Solution Architect – GenAI, Cloud',
+    period: 'Oct 2025 – Present',
+    description:
+      'Architecting and developing GenAI solutions for clients. Driving pre-sales and RFP activities. Mentoring developers and supporting resourcing and technical interviews. Part of the Cloud vertical, working primarily in Python.',
+    technologies: ['Python', 'Generative AI', 'LLMs', 'Cloud', 'Solution Architecture', 'Pre-sales & RFPs', 'Mentoring'],
+  },
+  {
     company: 'SenecaGlobal Solutions Pvt Ltd.',
     location: 'Hyderabad, Telangana',
     role: 'Technical Architect – Real Estate, Finance',
-    period: 'Jan 2022 – Present',
+    period: 'Jan 2022 – Sep 2025',
     description:
       'Led the development and integration of microservices using Python (FastAPI, Flask) on AWS, enhancing platform scalability. Designed ETL workflows using Airflow to ingest data from various vendors. Spearheaded development of "Fusion," an AI-powered chatbot using GraphRAG for knowledge graph interaction. Leveraged GPT-4o to automate content extraction from HTML files, improving efficiency by 50%. Implemented micro-frontend architecture and streamlined deployment using Docker and ECS, reducing deployment time by 30%. Directed sprint planning and provided technical guidance to a team of 10+ developers.',
     technologies: ['Python', 'FastAPI', 'Flask', 'AWS', 'Airflow', 'GraphRAG', 'GPT-4o', 'Docker', 'ECS', 'React', 'Vue.js'],

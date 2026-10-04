@@ -25,7 +25,7 @@ export function Experience() {
     <Section
       id="experience"
       eyebrow="Experience"
-      title="Ten years, five companies, one through-line."
+      title="Ten years, six companies, one through-line."
       intro="From ETL automation in banking to architecting AI platforms in real estate."
     >
       <div ref={listRef} className="relative ml-1.5 sm:ml-2">

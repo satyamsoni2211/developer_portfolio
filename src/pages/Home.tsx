@@ -10,6 +10,7 @@ import { Experience } from '@/sections/Experience'
 import { Hero } from '@/sections/Hero'
 import { Projects } from '@/sections/Projects'
 import { Skills } from '@/sections/Skills'
+import { Speaking } from '@/sections/Speaking'
 
 export default function Home() {
   const location = useLocation()
@@ -28,6 +29,7 @@ export default function Home() {
       <About />
       <Experience />
       <Projects />
+      <Speaking />
       <Skills />
       <Education />
       <Contact />

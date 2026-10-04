@@ -15,6 +15,7 @@ import { vi } from 'vitest'
 import { Contact } from './Contact'
 import { Education } from './Education'
 import { Skills } from './Skills'
+import { Speaking } from './Speaking'
 
 const wrap = (ui: React.ReactNode) => render(<AppProviders>{ui}</AppProviders>)
 
@@ -49,14 +50,14 @@ describe('Experience', () => {
     expect(firstSentence('No stop')).toBe('No stop')
   })
 
-  test('lists 5 roles; first is open; clicking another expands it', () => {
+  test('lists 6 roles; first is open; clicking another expands it', () => {
     wrap(<Experience />)
     const toggles = screen.getAllByRole('button').filter((b) => b.hasAttribute('aria-expanded'))
-    expect(toggles).toHaveLength(5)
+    expect(toggles).toHaveLength(6)
     expect(toggles[0]).toHaveAttribute('aria-expanded', 'true')
-    expect(toggles[1]).toHaveAttribute('aria-expanded', 'false')
-    fireEvent.click(toggles[1])
-    expect(toggles[1]).toHaveAttribute('aria-expanded', 'true')
+    expect(toggles[2]).toHaveAttribute('aria-expanded', 'false')
+    fireEvent.click(toggles[2])
+    expect(toggles[2]).toHaveAttribute('aria-expanded', 'true')
     expect(screen.getByText(/Designed fault-tolerant cloud-native architectures on AWS/)).toBeInTheDocument()
   })
 })
@@ -85,6 +86,20 @@ describe('Projects', () => {
     fireEvent.click(freelance)
     expect(freelance).toHaveAttribute('aria-pressed', 'true')
     await waitFor(() => expect(screen.queryByRole('link', { name: /FUSION/ })).not.toBeInTheDocument(), { timeout: 3000 })
+  })
+})
+
+describe('Speaking', () => {
+  test('renders four external talk links under the heading', () => {
+    wrap(<Speaking />)
+    expect(screen.getByRole('heading', { level: 2, name: 'Teaching what I build.' })).toBeInTheDocument()
+    const links = screen.getAllByRole('link')
+    expect(links).toHaveLength(4)
+    for (const a of links) {
+      expect(a).toHaveAttribute('target', '_blank')
+      expect(a.getAttribute('rel')).toContain('noopener')
+    }
+    expect(links[0]).toHaveAttribute('href', 'https://pycon.hk/2026/en/speakers/satyam-soni/')
   })
 })
 

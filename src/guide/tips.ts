@@ -3,6 +3,7 @@ export const TIPS: Record<string, string> = {
   about: 'Ten years across finance, telecom and real estate — here’s the short version.',
   experience: 'Click any role to read the full story.',
   projects: 'The big tiles are my freelance builds — open one for the full case study.',
+  speaking: 'I love teaching what I build — these are my workshops.',
   skills: 'Python is home base, but I’m comfortable across the stack.',
   education: 'Where it all started — Indore, 2016.',
   contact: 'Say hi! The copy button grabs my email in one click.',

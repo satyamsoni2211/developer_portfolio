@@ -12,6 +12,7 @@ export const PALETTES: Record<SectionId, Palette> = {
   about: p('#00d4c8', '#2a8cff', '#6a5cff'),
   experience: p('#2a6cff', '#5b4bff', '#00c2ff'),
   projects: p('#8a4bff', '#ff4bd8', '#4b6bff'),
+  speaking: p('#00d4c8', '#ffb347', '#2bff88'),
   skills: p('#ff4bd8', '#ffb347', '#8a4bff'),
   education: p('#ffb347', '#7dff6a', '#00d4c8'),
   contact: p('#2bff88', '#00d4c8', '#8a4bff'),
