@@ -82,7 +82,8 @@
   .marquee-track {
     animation: marquee 40s linear infinite;
   }
-  .marquee:hover .marquee-track {
+  .marquee:hover .marquee-track,
+  .marquee[data-paused='true'] .marquee-track {
     animation-play-state: paused;
   }
 }

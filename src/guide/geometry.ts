@@ -40,3 +40,10 @@ export function isAvoidTarget(el: EventTarget | null): boolean {
   if (el.closest('[data-guide]')) return false
   return el.closest(AVOID) !== null
 }
+
+export type Placement = { below: boolean; left: boolean }
+
+/** Returns `prev` when nothing changed so React bails out of re-rendering on pointer moves. */
+export function nextPlacement(prev: Placement, next: Placement): Placement {
+  return prev.below === next.below && prev.left === next.left ? prev : next
+}

@@ -3,7 +3,7 @@ import { animate, motion, useMotionValue, useSpring, useTransform, useVelocity }
 import { cn } from '@/lib/utils'
 import { springs } from '@/theme/motion'
 import { Badge } from './Badge'
-import { companionTarget, gaze, isAvoidTarget, shouldFollow, tiltFromVelocity, type Point } from './geometry'
+import { companionTarget, gaze, isAvoidTarget, nextPlacement, shouldFollow, tiltFromVelocity, type Point } from './geometry'
 import { useGuide } from './GuideProvider'
 import { SpeechBubble } from './SpeechBubble'
 import { nextTip, restTip } from './tips'
@@ -65,7 +65,7 @@ export function Companion() {
       const t = companionTarget(p, viewport(), SIZE)
       tx.set(t.x)
       ty.set(t.y)
-      setPlacement({ below: t.y < 140, left: t.x < 260 })
+      setPlacement((prev) => nextPlacement(prev, { below: t.y < 140, left: t.x < 260 }))
     }
     if (pointer.current) moveTo(pointer.current)
 
@@ -81,8 +81,8 @@ export function Companion() {
       gx.set(d.dx)
       gy.set(d.dy)
       if (!shouldFollow(p, center, resting.current)) return
+      if (resting.current) setTip(null)
       resting.current = false
-      setTip(null)
       moveTo(p)
       window.clearTimeout(idle)
       idle = window.setTimeout(() => {

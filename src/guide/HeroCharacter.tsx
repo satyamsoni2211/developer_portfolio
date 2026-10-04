@@ -14,7 +14,7 @@ export function HeroCharacter() {
   const { setHeroVisible, heroHeadRect: heroHeadRectRef, shownTips: shownTipsRef, hidden } = g
   const wrapRef = useRef<HTMLDivElement>(null)
   const headRef = useRef<HTMLDivElement>(null)
-  const inView = useInView(wrapRef, { amount: 0.25 })
+  const inView = useInView(wrapRef, { amount: 0.25, initial: true })
   const reduce = useReducedMotion()
   const finePointer = useMediaQuery('(pointer: fine)')
   const gx = useMotionValue(0)
