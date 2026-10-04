@@ -3,6 +3,8 @@ import { useLocation } from 'react-router'
 import { profile } from '@/data/profile'
 import { scrollToId } from '@/lib/scroll'
 import { useDocumentMeta } from '@/lib/useDocumentMeta'
+import { About } from '@/sections/About'
+import { Hero } from '@/sections/Hero'
 
 export default function Home() {
   const location = useLocation()
@@ -15,9 +17,8 @@ export default function Home() {
 
   return (
     <main id="main">
-      <section id="hero" className="mx-auto max-w-6xl px-4 pt-32 sm:px-6">
-        <h1 className="text-display font-semibold">{profile.name}.</h1>
-      </section>
+      <Hero />
+      <About />
     </main>
   )
 }
