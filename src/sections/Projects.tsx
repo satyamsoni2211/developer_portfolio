@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, LayoutGroup, motion } from 'motion/react'
 import { ProjectCard } from '@/components/ProjectCard'
 import { Reveal } from '@/components/Reveal'
+import { TiltCard } from '@/components/TiltCard'
 import { Section } from '@/components/Section'
 import { projects } from '@/data/projects'
 import type { Project } from '@/data/types'
@@ -57,16 +58,19 @@ export function Projects() {
       <LayoutGroup>
         <motion.ul layout className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout" initial={false}>
-            {visible.map((p) => (
+            {visible.map((p, i) => (
               <motion.li
                 layout
                 key={p.slug}
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={springs.soft}
+                initial={{ opacity: 0, scale: 0.9, y: 40 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: '0px 0px -8% 0px' }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ ...springs.pop, delay: (i % 3) * 0.08 }}
               >
-                <ProjectCard project={p} />
+                <TiltCard>
+                  <ProjectCard project={p} />
+                </TiltCard>
               </motion.li>
             ))}
           </AnimatePresence>

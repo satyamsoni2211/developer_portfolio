@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { Menu, X } from 'lucide-react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react'
 import { Link, useLocation, useNavigate } from 'react-router'
 import { NAV_SECTIONS } from '@/data/sections'
 import { scrollToId, scrollToTop } from '@/lib/scroll'
@@ -11,6 +11,8 @@ export function Nav({ active, extra }: { active: string | null; extra?: ReactNod
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
+  const { scrollYProgress } = useScroll()
+  const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 })
 
   const go = (id: string) => {
     setOpen(false)
@@ -20,6 +22,11 @@ export function Nav({ active, extra }: { active: string | null; extra?: ReactNod
 
   return (
     <header className="glass fixed inset-x-0 top-0 z-40 border-b border-line">
+      <motion.div
+        aria-hidden
+        style={{ scaleX: progress }}
+        className="absolute inset-x-0 bottom-0 h-[2px] origin-left bg-gradient-to-r from-[#2bff88] via-[#00d4c8] to-[#8a4bff]"
+      />
       <nav aria-label="Primary" className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           to="/"

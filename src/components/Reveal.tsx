@@ -4,10 +4,16 @@ import { springs } from '@/theme/motion'
 
 const VIEWPORT = { once: true, margin: '0px 0px -10% 0px' } as const
 
-function useItemVariants(delay = 0): Variants {
+function useItemVariants(delay = 0, pop = false): Variants {
   const reduce = useReducedMotion()
   if (reduce) {
     return { hidden: { opacity: 0 }, shown: { opacity: 1, transition: { duration: 0.15, delay } } }
+  }
+  if (pop) {
+    return {
+      hidden: { opacity: 0, y: 48, scale: 0.9, filter: 'blur(10px)' },
+      shown: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', transition: { ...springs.pop, delay } },
+    }
   }
   return {
     hidden: { opacity: 0, y: 24, filter: 'blur(8px)' },
@@ -24,7 +30,7 @@ export function Reveal({ children, className, delay = 0 }: { children: ReactNode
   )
 }
 
-const groupVariants: Variants = { hidden: {}, shown: { transition: { staggerChildren: 0.06 } } }
+const groupVariants: Variants = { hidden: {}, shown: { transition: { staggerChildren: 0.08 } } }
 
 export function RevealGroup({
   children,
@@ -43,8 +49,18 @@ export function RevealGroup({
   )
 }
 
-export function RevealItem({ children, className, as = 'div' }: { children: ReactNode; className?: string; as?: 'div' | 'li' }) {
-  const variants = useItemVariants()
+export function RevealItem({
+  children,
+  className,
+  as = 'div',
+  pop = false,
+}: {
+  children: ReactNode
+  className?: string
+  as?: 'div' | 'li'
+  pop?: boolean
+}) {
+  const variants = useItemVariants(0, pop)
   const Component = as === 'li' ? motion.li : motion.div
   return (
     <Component className={className} variants={variants}>

@@ -3,6 +3,7 @@ import { Pause, Play } from 'lucide-react'
 import { RevealGroup, RevealItem } from '@/components/Reveal'
 import { Section } from '@/components/Section'
 import { Tag } from '@/components/Tag'
+import { TiltCard } from '@/components/TiltCard'
 import { marqueeSkills, skillCategories } from '@/data/skills'
 
 export function Skills() {
@@ -34,15 +35,19 @@ export function Skills() {
       </div>
       <RevealGroup className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {skillCategories.map((cat) => (
-          <RevealItem key={cat.id} className="card p-6">
-            <h3 className="font-semibold">{cat.label}</h3>
-            <ul className="mt-4 flex flex-wrap gap-1.5">
-              {cat.items.map((item) => (
-                <li key={item}>
-                  <Tag>{item}</Tag>
-                </li>
-              ))}
-            </ul>
+          <RevealItem key={cat.id} pop>
+            <TiltCard>
+              <div className="card h-full p-6">
+                <h3 className="font-semibold">{cat.label}</h3>
+                <ul className="mt-4 flex flex-wrap gap-1.5">
+                  {cat.items.map((item) => (
+                    <li key={item}>
+                      <Tag>{item}</Tag>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </TiltCard>
           </RevealItem>
         ))}
       </RevealGroup>

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Outlet, ScrollRestoration, useLocation } from 'react-router'
+import { Aurora } from '@/background/Aurora'
 import { Footer } from '@/components/Footer'
 import { Nav } from '@/components/Nav'
 import { SECTION_IDS } from '@/data/sections'
@@ -18,6 +19,7 @@ export function RootLayout() {
 
   return (
     <GuideProvider context={context}>
+      <Aurora context={context} />
       <a
         href="#main"
         className="sr-only z-[70] rounded-full bg-accent-fill px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-3"

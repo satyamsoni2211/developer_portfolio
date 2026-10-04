@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { companionTarget, gaze, isAvoidTarget, shouldFollow, tiltFromVelocity } from './geometry'
+import { companionTarget, gaze, initialTarget, isAvoidTarget, shouldFollow, tiltFromVelocity } from './geometry'
 import { nextTip, restTip, tipFor } from './tips'
 
 const vp = { w: 1000, h: 800 }
@@ -76,5 +76,12 @@ describe('restTip', () => {
     expect(shown.has('experience')).toBe(false)
     expect(restTip('experience', shown, true)).toMatch(/role/)
     expect(restTip('experience', shown, true)).toBeNull()
+  })
+})
+
+describe('initialTarget', () => {
+  test('follows a known pointer, otherwise parks bottom-right (never over the nav)', () => {
+    expect(initialTarget({ x: 100, y: 100 }, vp, 72)).toEqual(companionTarget({ x: 100, y: 100 }, vp, 72))
+    expect(initialTarget(null, vp, 72)).toEqual({ x: 1000 - 72 - 24, y: 800 - 72 - 24 })
   })
 })

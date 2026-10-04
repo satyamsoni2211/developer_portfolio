@@ -6,6 +6,7 @@ import { CountUp } from '@/components/CountUp'
 import { ProjectCover } from '@/components/ProjectCover'
 import { Reveal, RevealGroup, RevealItem } from '@/components/Reveal'
 import { Tag } from '@/components/Tag'
+import { TiltCard } from '@/components/TiltCard'
 import { profile } from '@/data/profile'
 import { projects } from '@/data/projects'
 import type { Project } from '@/data/types'
@@ -109,19 +110,23 @@ export default function ProjectPage() {
           <Block title="Services">
             <RevealGroup as="ul" className="grid gap-4 md:grid-cols-2">
               {project.services.map((s) => (
-                <RevealItem as="li" key={s.name} className="card p-6">
-                  <h3 className="text-lg font-semibold">{s.name}</h3>
-                  <p className="mt-2 text-muted">{s.description}</p>
-                  {s.points && (
-                    <ul className="mt-4 space-y-2 text-[15px]">
-                      {s.points.map((pt) => (
-                        <li key={pt} className="flex gap-2">
-                          <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                          {pt}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                <RevealItem as="li" key={s.name} pop>
+                  <TiltCard>
+                    <div className="card h-full p-6">
+                      <h3 className="text-lg font-semibold">{s.name}</h3>
+                      <p className="mt-2 text-muted">{s.description}</p>
+                      {s.points && (
+                        <ul className="mt-4 space-y-2 text-[15px]">
+                          {s.points.map((pt) => (
+                            <li key={pt} className="flex gap-2">
+                              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                              {pt}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </TiltCard>
                 </RevealItem>
               ))}
             </RevealGroup>
@@ -151,16 +156,20 @@ export default function ProjectPage() {
         </Block>
 
         <Block title="Results">
-          <dl className="grid gap-4 sm:grid-cols-3">
+          <RevealGroup className="grid gap-4 sm:grid-cols-3">
             {project.metrics.map((m) => (
-              <div key={m.label} className="card flex flex-col-reverse justify-end p-6">
-                <dt className="mt-2 text-muted">{m.label}</dt>
-                <dd className="text-5xl font-semibold tracking-tight">
-                  {'text' in m ? m.text : <CountUp value={m.value} prefix={m.prefix} suffix={m.suffix} />}
-                </dd>
-              </div>
+              <RevealItem key={m.label} pop>
+                <TiltCard>
+                  <dl className="card flex h-full flex-col-reverse justify-end p-6">
+                    <dt className="mt-2 text-muted">{m.label}</dt>
+                    <dd className="text-5xl font-semibold tracking-tight">
+                      {'text' in m ? m.text : <CountUp value={m.value} prefix={m.prefix} suffix={m.suffix} />}
+                    </dd>
+                  </dl>
+                </TiltCard>
+              </RevealItem>
             ))}
-          </dl>
+          </RevealGroup>
         </Block>
 
         <nav aria-label="More projects" className="mt-24 flex flex-col gap-4 sm:flex-row">

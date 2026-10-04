@@ -17,7 +17,7 @@ export function ProjectCard({ project }: { project: Project }) {
     <Link
       to={`/projects/${project.slug}`}
       viewTransition
-      className="card group flex h-full flex-col overflow-hidden transition-transform duration-500 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      className="card group flex h-full flex-col overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
     >
       <ProjectCover variant={project.cover} slug={project.slug} className={freelance ? 'aspect-[4/3]' : 'aspect-[16/10]'} />
       <div className="flex flex-1 flex-col p-6">

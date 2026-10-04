@@ -22,6 +22,11 @@ export function companionTarget(pointer: Point, vp: Viewport, size: number, offs
   return { x: clamp(x, margin, vp.w - size - margin), y: clamp(y, margin, vp.h - size - margin) }
 }
 
+/** Where the companion heads when it appears: beside the pointer if known, else the bottom-right corner. */
+export function initialTarget(pointer: Point | null, vp: Viewport, size: number, inset = 24): Point {
+  return pointer ? companionTarget(pointer, vp, size) : { x: vp.w - size - inset, y: vp.h - size - inset }
+}
+
 /** Lean in the direction of travel. `vx` in px/s. */
 export function tiltFromVelocity(vx: number, max = 10, k = 0.012): number {
   return clamp(vx * k, -max, max)

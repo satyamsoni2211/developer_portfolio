@@ -1,6 +1,7 @@
 import { Reveal, RevealGroup, RevealItem } from '@/components/Reveal'
 import { Section } from '@/components/Section'
 import { Tag } from '@/components/Tag'
+import { TiltCard } from '@/components/TiltCard'
 import { profile } from '@/data/profile'
 
 export function About() {
@@ -16,9 +17,13 @@ export function About() {
         </RevealGroup>
         <RevealGroup as="ul" className="grid gap-4">
           {profile.pillars.map((pillar) => (
-            <RevealItem as="li" key={pillar.title} className="card p-6">
-              <h3 className="text-lg font-semibold">{pillar.title}</h3>
-              <p className="mt-2 text-muted">{pillar.body}</p>
+            <RevealItem as="li" key={pillar.title} pop>
+              <TiltCard>
+                <div className="card h-full p-6">
+                  <h3 className="text-lg font-semibold">{pillar.title}</h3>
+                  <p className="mt-2 text-muted">{pillar.body}</p>
+                </div>
+              </TiltCard>
             </RevealItem>
           ))}
         </RevealGroup>

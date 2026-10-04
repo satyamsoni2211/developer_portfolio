@@ -3,7 +3,7 @@ import { animate, motion, useMotionValue, useSpring, useTransform, useVelocity }
 import { cn } from '@/lib/utils'
 import { springs } from '@/theme/motion'
 import { Badge } from './Badge'
-import { companionTarget, gaze, isAvoidTarget, nextPlacement, shouldFollow, tiltFromVelocity, type Point } from './geometry'
+import { companionTarget, gaze, initialTarget, isAvoidTarget, nextPlacement, shouldFollow, tiltFromVelocity, type Point } from './geometry'
 import { useGuide } from './GuideProvider'
 import { SpeechBubble } from './SpeechBubble'
 import { nextTip, restTip } from './tips'
@@ -61,13 +61,18 @@ export function Companion() {
     let outside = false
     const fade = () => animate(opacity, avoid || selecting || outside ? 0 : 1, { duration: 0.2 })
 
-    const moveTo = (p: Point) => {
-      const t = companionTarget(p, viewport(), SIZE)
+    const goTo = (t: Point) => {
       tx.set(t.x)
       ty.set(t.y)
       setPlacement((prev) => nextPlacement(prev, { below: t.y < 140, left: t.x < 260 }))
     }
-    if (pointer.current) moveTo(pointer.current)
+    const moveTo = (p: Point) => goTo(companionTarget(p, viewport(), SIZE))
+    const first = initialTarget(pointer.current, viewport(), SIZE)
+    goTo(first)
+    // Also drive the springs directly: under StrictMode the re-run sets tx/ty to the value they
+    // already hold, which emits no change, so the springs would never leave the spawn point.
+    x.set(first.x)
+    y.set(first.y)
 
     const onMove = (e: PointerEvent) => {
       if (e.pointerType !== 'mouse') return
