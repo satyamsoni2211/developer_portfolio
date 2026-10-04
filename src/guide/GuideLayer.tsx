@@ -52,7 +52,7 @@ export function GuideSkipLink() {
     <button
       type="button"
       onClick={openMenu}
-      className="sr-only z-[70] rounded-full bg-accent px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-40 focus:top-3"
+      className="sr-only z-[70] rounded-full bg-accent-fill px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-40 focus:top-3"
     >
       Open guide menu
     </button>

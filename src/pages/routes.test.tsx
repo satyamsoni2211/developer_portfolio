@@ -7,6 +7,7 @@ describe('routes', () => {
     renderRoute('/')
     expect(await screen.findByRole('heading', { level: 1, name: /Satyam Soni/ })).toBeInTheDocument()
     expect(screen.getByRole('navigation')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /^SS\..*home/ })).toHaveAttribute('href', '/')
   })
 
   test('project route renders the project', async () => {

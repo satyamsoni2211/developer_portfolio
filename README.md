@@ -1,170 +1,61 @@
-# 🖥️ Developer Terminal Portfolio
+# Satyam Soni — Portfolio
 
-[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+Personal portfolio of **Satyam Soni, Technical Architect** — an Apple-inspired, theme-aware site with a 2D animated guide (Satyam's illustrated character) that follows your cursor and points out what's worth seeing.
 
-**A modern, interactive developer portfolio template** where visitors navigate your profile exactly like a real terminal — `cd projects`, `ls skills`, `cat experience.txt` and more!
+**Live:** https://www.satyamsoni.com
 
-Stand out instantly from boring scrollable portfolios. Built with React 19, TypeScript, Tailwind CSS & Vite.
+![Preview](public/og.png)
 
-**[🔗 Live Demo](https://www.satyamsoni.com)** • **[⭐ Star the Repo](https://github.com/satyamsoni2211/developer_portfolio)** • **[Fork & Use as Template](https://github.com/satyamsoni2211/developer_portfolio/fork)**
+## Features
 
-![Terminal Demo](thumbnails/screen.png)
+- Light & dark themes that follow your OS, with a manual override
+- Scroll-driven reveals, parallax hero, count-up stats, animated experience timeline
+- 9 project case studies (3 freelance computer-vision builds + 6 enterprise platforms) with animated architecture diagrams
+- Card → case-study morph using the View Transitions API
+- Guide character: head and eyes track the cursor, trails it as a companion, offers section tips, docks on touch devices, respects *Reduce motion*
+- Fast: lazy-loaded routes, ~100 KB of character art, no web fonts
 
-> _Tip: Record a quick 10–15 second GIF of someone typing `cd projects` → `ls` → `cat ...` and replace the image above. It dramatically increases engagement on GitHub._
+## Stack
 
-## ✨ Features
+React 19 · TypeScript · Vite · Tailwind CSS · Motion · React Router · Lenis · Vitest
 
-- 🖥️ Full terminal-like experience with **tab completion**, **command history**, and classic commands
-- 🌐 Every portfolio section is a "directory" you can `cd` into
-- 📱 Fully responsive design
-- 🌑 **Dark mode only** - Classic terminal aesthetic with CRT scanline effects
-- 💼 Professional experience & projects showcase
-- 🛠️ Comprehensive skills section organized by category
-- ♿ Accessible & SEO-friendly
-- ⚡ Lightning fast thanks to Vite + modern React
-- 🎮 Boot sequence animation for authentic terminal feel
-
-## 🖥️ Terminal Commands Cheat Sheet
+## Develop
 
 ```bash
-satyam@portfolio:~$ help
-# Shows this exact command list
-```
-
-| Command           | What it does                        | Example                     |
-| ----------------- | ----------------------------------- | --------------------------- |
-| `help`           | List all available commands         | `help`                      |
-| `ls`             | Show available sections & files     | `ls`                        |
-| `cd <section>`   | Navigate to a section              | `cd projects`               |
-| `cd ..`          | Go back to home directory          | `cd ..`                     |
-| `pwd`            | Print current working directory    | `pwd`                       |
-| `cat <file>`     | Display file contents              | `cat about.txt`             |
-| `whoami`         | Show your personal info            | `whoami`                    |
-| `clear` / `cls`  | Clear the terminal screen          | `clear`                     |
-| `history`        | Show previous commands             | `history`                   |
-| `exit` / `logout`| Close the terminal session        | `exit`                      |
-
-**Pro moves**: Press **Tab** to autocomplete • Use **↑ / ↓** arrows for command history
-
-## 🚀 Quick Start
-
-### 1. Clone & Install
-
-```bash
-git clone https://github.com/satyamsoni2211/developer_portfolio.git
-cd developer_portfolio
 npm install
+npm run dev        # http://localhost:5173
+npm test           # unit tests
+npm run build      # production build to dist/
 ```
 
-### 2. Development
+## Editing content
+
+All content is typed data in `src/data/`:
+
+| File | Contents |
+| --- | --- |
+| `profile.ts` | name, role, contact links, bio, pillars, industries |
+| `experience.ts` | roles, newest first |
+| `projects.ts` | case studies — services, models, tech, metrics, architecture graph |
+| `skills.ts` | skill categories and the marquee list |
+| `education.ts` | degree |
+
+Guide tips live in `src/guide/tips.ts`.
+
+## Character art
+
+`assets-src/character/character.svg` is the source illustration. Regenerate the layered WebP files, `layout.json` and the Open Graph image with:
 
 ```bash
-npm run dev
+npm run assets
 ```
 
-→ Open http://localhost:5173
+Crop boxes and eye positions are constants at the top of `scripts/build-character.mjs`.
 
-### 3. Production Build
+## Deploy
 
-```bash
-npm run build
-```
+Pushing to `main` runs `.github/workflows/vercel.yml`, which builds and deploys to Vercel production. Pull requests build only. Required secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
 
-## 🛠️ Personalization (takes ~5–10 minutes)
+## License
 
-All important content lives in **`src/App.tsx`** in the `PORTFOLIO_DATA` constant:
-
-| Field           | What to change                                        |
-| --------------- | ----------------------------------------------------- |
-| `name`          | Your name                                            |
-| `role`          | Your job title                                       |
-| `location`      | Your location                                        |
-| `email`         | Your email address                                   |
-| `github`        | Your GitHub profile URL                              |
-| `linkedin`      | Your LinkedIn profile URL                            |
-| `website`       | Your personal website                                |
-| `bio`           | Your biography                                       |
-| `skills`        | Technical skills organized by category               |
-| `experience`    | Work history (company, role, period, description)  |
-| `education`     | Education details                                    |
-| `projects`      | Featured projects with tech stack                   |
-| `contact`       | Contact information                                  |
-
-**Example – editing your info** (`src/App.tsx`):
-
-```tsx
-const PORTFOLIO_DATA = {
-  name: 'Your Name',
-  role: 'Full Stack Developer',
-  location: 'New York, USA',
-  email: 'you@example.com',
-  github: 'https://github.com/yourusername',
-  linkedin: 'https://linkedin.com/in/yourusername',
-  website: 'https://yourwebsite.com',
-  bio: `Your bio here...`,
-  skills: {
-    languages: ['JavaScript', 'TypeScript', 'Python'],
-    frameworks: ['React', 'Node.js', 'Express'],
-    // ... more categories
-  },
-  // ... more fields
-};
-```
-
-## 📁 Folder Structure
-
-```
-src/
-├── App.tsx              ← Main app with PORTFOLIO_DATA + terminal logic
-├── App.css              ← Terminal-specific styling
-├── main.tsx             ← Entry point
-├── index.css            ← Global styles
-├── hooks/
-│   └── use-mobile.ts    ← Mobile detection hook
-└── components/
-    └── ui/              ← Reusable UI components (from shadcn/ui)
-```
-
-## 🚀 Deployment
-
-The project includes GitHub Actions workflows for automatic deployment to Vercel:
-
-| Workflow          | Trigger        | Description           |
-| ----------------- | -------------- | --------------------- |
-| `vercel.yml`     | Push to `main`| Production deployment |
-| `vercel-preview.yml` | PRs        | Preview deployments  |
-
-### Vercel Setup
-
-1. Create a Vercel account and connect your GitHub repository
-2. Generate a Vercel token: [Account Settings → Tokens](https://vercel.com/account/tokens)
-3. Add these **GitHub Secrets**:
-   - `VERCEL_TOKEN` - Your Vercel access token
-   - `VERCEL_ORG_ID` - Run `vercel link` locally to get this
-   - `VERCEL_PROJECT_ID` - Run `vercel link` locally to get this
-
-### Alternative: Netlify
-
-The project also includes a Netlify workflow at `.github/workflows/netlify.yml`.
-
-## 🤝 Contributing
-
-Bug reports, new command ideas, design improvements, or theme suggestions are very welcome!
-
-1. Fork the repo
-2. Create your feature branch (`git checkout -b feature/amazing-command`)
-3. Commit your changes (`git commit -m 'Add some amazing command'`)
-4. Push to the branch (`git push origin feature/amazing-command`)
-5. Open a Pull Request
-
-## 📜 License
-
-MIT © [Satyam Soni](https://github.com/satyamsoni2211)
-
----
-
-Made with ❤️ and way too much time spent typing `cd` instead of clicking
+MIT © Satyam Soni

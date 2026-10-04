@@ -8,6 +8,7 @@
   --fg: 29 29 31;
   --fg-muted: 110 110 115;
   --accent: 0 113 227;
+  --accent-fill: 0 113 227;
   --line: rgba(0, 0, 0, 0.08);
   --glass: rgba(251, 251, 253, 0.72);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 10px 30px rgba(0, 0, 0, 0.06);
@@ -20,6 +21,7 @@
   --fg: 245 245 247;
   --fg-muted: 161 161 166;
   --accent: 41 151 255;
+  --accent-fill: 0 113 227;
   --line: rgba(255, 255, 255, 0.12);
   --glass: rgba(22, 22, 23, 0.72);
   --shadow: none;
@@ -33,6 +35,7 @@
     --fg: 245 245 247;
     --fg-muted: 161 161 166;
     --accent: 41 151 255;
+  --accent-fill: 0 113 227;
     --line: rgba(255, 255, 255, 0.12);
     --glass: rgba(22, 22, 23, 0.72);
     --shadow: none;

@@ -9,6 +9,7 @@ export default {
         fg: 'rgb(var(--fg) / <alpha-value>)',
         muted: 'rgb(var(--fg-muted) / <alpha-value>)',
         accent: 'rgb(var(--accent) / <alpha-value>)',
+        'accent-fill': 'rgb(var(--accent-fill) / <alpha-value>)',
         line: 'var(--line)',
       },
       fontFamily: {

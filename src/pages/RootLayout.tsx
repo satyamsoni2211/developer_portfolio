@@ -20,7 +20,7 @@ export function RootLayout() {
     <GuideProvider context={context}>
       <a
         href="#main"
-        className="sr-only z-[70] rounded-full bg-accent px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-3"
+        className="sr-only z-[70] rounded-full bg-accent-fill px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-3"
       >
         Skip to content
       </a>

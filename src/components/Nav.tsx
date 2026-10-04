@@ -30,9 +30,9 @@ export function Nav({ active, extra }: { active: string | null; extra?: ReactNod
             }
           }}
           className="text-lg font-semibold tracking-tight"
-          aria-label="Satyam Soni — home"
         >
           SS<span className="text-accent">.</span>
+          <span className="sr-only"> Satyam Soni — home</span>
         </Link>
 
         <ul className="hidden items-center gap-1 md:flex">
