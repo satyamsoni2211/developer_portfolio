@@ -10,6 +10,10 @@ import { waitFor } from '@testing-library/react'
 import { projects } from '@/data/projects'
 import { metricText } from '@/components/ProjectCard'
 import { filterProjects, Projects } from './Projects'
+import { vi } from 'vitest'
+import { Contact } from './Contact'
+import { Education } from './Education'
+import { Skills } from './Skills'
 
 const wrap = (ui: React.ReactNode) => render(<AppProviders>{ui}</AppProviders>)
 
@@ -76,5 +80,38 @@ describe('Projects', () => {
     fireEvent.click(freelance)
     expect(freelance).toHaveAttribute('aria-pressed', 'true')
     await waitFor(() => expect(screen.queryByRole('link', { name: /FUSION/ })).not.toBeInTheDocument(), { timeout: 3000 })
+  })
+})
+
+describe('Skills / Education / Contact', () => {
+  test('skills shows all 8 categories', () => {
+    wrap(<Skills />)
+    for (const label of ['Programming Languages', 'Frameworks & Libraries', 'AI / ML', 'Databases', 'DevOps & Tools', 'Cloud Technologies', 'Version Control & Tools', 'Operating Systems']) {
+      expect(screen.getByRole('heading', { level: 3, name: label })).toBeInTheDocument()
+    }
+  })
+
+  test('education card', () => {
+    wrap(<Education />)
+    expect(screen.getByText('Bachelor of Engineering in Computer Science')).toBeInTheDocument()
+    expect(screen.getByText(/75\/100/)).toBeInTheDocument()
+  })
+
+  test('contact copies email and toasts', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined)
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true })
+    wrap(<Contact />)
+    expect(screen.getByRole('link', { name: /satyamsoni@hotmail.co.uk/ })).toHaveAttribute('href', 'mailto:satyamsoni@hotmail.co.uk')
+    fireEvent.click(screen.getByRole('button', { name: /copy email/i }))
+    expect(await screen.findByText('Email copied')).toBeInTheDocument()
+    expect(writeText).toHaveBeenCalledWith('satyamsoni@hotmail.co.uk')
+    expect(screen.getByText('Résumé available on request.')).toBeInTheDocument()
+  })
+
+  test('contact falls back when clipboard is unavailable', async () => {
+    Object.defineProperty(navigator, 'clipboard', { value: undefined, configurable: true })
+    wrap(<Contact />)
+    fireEvent.click(screen.getByRole('button', { name: /copy email/i }))
+    expect(await screen.findByText(/Press ⌘C/)).toBeInTheDocument()
   })
 })

@@ -4,9 +4,12 @@ import { profile } from '@/data/profile'
 import { scrollToId } from '@/lib/scroll'
 import { useDocumentMeta } from '@/lib/useDocumentMeta'
 import { About } from '@/sections/About'
+import { Contact } from '@/sections/Contact'
+import { Education } from '@/sections/Education'
 import { Experience } from '@/sections/Experience'
 import { Hero } from '@/sections/Hero'
 import { Projects } from '@/sections/Projects'
+import { Skills } from '@/sections/Skills'
 
 export default function Home() {
   const location = useLocation()
@@ -23,6 +26,9 @@ export default function Home() {
       <About />
       <Experience />
       <Projects />
+      <Skills />
+      <Education />
+      <Contact />
     </main>
   )
 }
