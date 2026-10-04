@@ -1,0 +1,273 @@
+import type { Project } from './types'
+
+export const projects: Project[] = [
+  {
+    slug: 'defect-detection',
+    name: 'Defect Detection',
+    tagline: 'Vision-based defect analysis for differential gears.',
+    kind: 'freelance',
+    industry: 'Manufacturing',
+    role: 'Solo developer',
+    summary:
+      'An in-house inspection system that photographs differential gears with high-resolution cameras, runs a YOLO11s detector and gives the operator an annotated pass/fail verdict in under five seconds.',
+    problem:
+      'A mechanical manufacturer needed reliable, repeatable defect analysis for differential gears — fast enough for the shop floor and without recurring cloud costs.',
+    solution:
+      'Three cooperating services: a camera service on Raspberry Pi that drives 64 MP cameras and reports their health, a FastAPI backend that orchestrates each inspection and annotates defects with a YOLO11s model, and a Tauri desktop dashboard where operators trigger runs, read verdicts and browse past inspections.',
+    services: [
+      {
+        name: 'Camera Service',
+        description: 'Captures images from 64 MP Arduino cameras attached to Raspberry Pi devices.',
+        points: ['High-resolution capture on demand', 'Health status reporting for every camera'],
+      },
+      {
+        name: 'Defect Backend',
+        description: 'Core of the product: owns the inspection workflow end to end.',
+        points: ['Orchestrates the Camera Service', 'Runs YOLO11s analysis and annotates defects', 'Persists inspections and verdicts to SQLite'],
+      },
+      {
+        name: 'Defect Dashboard',
+        description: 'Operator desktop app built with Tauri and React.',
+        points: ['Trigger inspection workflows', 'See verdicts with annotated images', 'Browse historical inspections'],
+      },
+    ],
+    models: ['YOLO11s'],
+    tech: ['FastAPI', 'Ultralytics', 'PyTorch', 'OpenCV', 'Rust', 'Tauri', 'React', 'SQLite'],
+    metrics: [
+      { value: 97, suffix: '%', label: 'detection accuracy' },
+      { value: 5, prefix: '≤ ', suffix: ' s', label: 'end-to-end inspection' },
+      { text: 'In-house', label: 'deployment with regular backups — no cloud bill' },
+    ],
+    architecture: {
+      nodes: [
+        { id: 'dash', label: 'Defect Dashboard', sub: 'Tauri · React', kind: 'client' },
+        { id: 'backend', label: 'Defect Backend', sub: 'FastAPI', kind: 'service' },
+        { id: 'camsvc', label: 'Camera Service', sub: 'Raspberry Pi', kind: 'service' },
+        { id: 'yolo', label: 'YOLO11s', sub: 'Ultralytics', kind: 'model' },
+        { id: 'db', label: 'SQLite', sub: 'inspections', kind: 'store' },
+        { id: 'cams', label: '64 MP cameras', sub: 'Arduino', kind: 'device' },
+      ],
+      edges: [
+        { from: 'dash', to: 'backend', label: 'trigger · verdicts', bidirectional: true },
+        { from: 'backend', to: 'camsvc', label: 'capture', bidirectional: true },
+        { from: 'backend', to: 'yolo', label: 'inference' },
+        { from: 'backend', to: 'db', label: 'results' },
+        { from: 'camsvc', to: 'cams', label: 'control · health' },
+      ],
+    },
+    cover: 'gear',
+  },
+  {
+    slug: 'stryve',
+    name: 'Stryve',
+    tagline: "Guided workouts that check your pose against your trainer's.",
+    kind: 'freelance',
+    industry: 'Fitness',
+    role: 'Lead developer',
+    summary:
+      "A guided-workout platform where trainees follow a trainer's recorded movements and get their posture checked against the trainer's pose.",
+    problem: "Trainees working out on their own can't tell whether their form matches the trainer's.",
+    solution:
+      'Trainer videos are uploaded through the Stryve backend; a Celery-based extraction service runs MediaPipe pose estimation concurrently, stores pose keypoints as JSON on S3 and generates a 3D motion-coordinate file that drives a 3D animation of the trainer. Role-based access and course subscriptions are built into the API.',
+    services: [
+      {
+        name: 'Stryve Backend',
+        description: 'FastAPI service behind every app screen.',
+        points: ['Video upload', 'RBAC for admin, trainer and trainee', 'Subscription-based courses'],
+      },
+      {
+        name: 'Pose Extraction Service',
+        description: 'Core pipeline of the product, running on Celery workers.',
+        points: ['Google MediaPipe pose extraction', 'Pose JSON saved to S3', '3D motion-coordinate file to animate the trainer in 3D', 'Threaded runs for concurrent extraction'],
+      },
+    ],
+    models: ['Google MediaPipe Pose'],
+    tech: ['FastAPI', 'PyTorch', 'OpenCV', 'MediaPipe', 'Celery', 'PostgreSQL', 'AWS S3', 'AWS ECS', 'AWS SQS', 'AWS RDS'],
+    metrics: [{ value: 95, suffix: '%', label: 'pose accuracy' }],
+    architecture: {
+      nodes: [
+        { id: 'apps', label: 'Trainer & trainee apps', kind: 'client' },
+        { id: 'backend', label: 'Stryve Backend', sub: 'FastAPI · RBAC', kind: 'service' },
+        { id: 'rds', label: 'PostgreSQL', sub: 'AWS RDS', kind: 'store' },
+        { id: 'sqs', label: 'Job queue', sub: 'AWS SQS', kind: 'store' },
+        { id: 'pose', label: 'Pose Extraction', sub: 'Celery on ECS', kind: 'service' },
+        { id: 'mp', label: 'MediaPipe Pose', kind: 'model' },
+        { id: 's3', label: 'S3', sub: 'videos · pose JSON · 3D motion', kind: 'store' },
+      ],
+      edges: [
+        { from: 'apps', to: 'backend', label: 'REST', bidirectional: true },
+        { from: 'backend', to: 'rds' },
+        { from: 'backend', to: 'sqs', label: 'enqueue' },
+        { from: 'sqs', to: 'pose', label: 'consume' },
+        { from: 'pose', to: 'mp', label: 'keypoints' },
+        { from: 'pose', to: 's3', label: 'write' },
+      ],
+    },
+    cover: 'pose',
+  },
+  {
+    slug: 'crickbuzz',
+    name: 'CrickBuzz',
+    tagline: 'Ball-trajectory extraction from cricket net-practice videos.',
+    kind: 'freelance',
+    industry: 'Sports analytics',
+    role: 'Solo developer',
+    summary:
+      'A computer-vision pipeline that extracts the full ball trajectory from net-practice videos, for analysis and for building 3D replays in Unity.',
+    problem: 'A small, fast ball is easily lost between frames, leaving gaps that break downstream analysis and 3D reconstruction.',
+    solution:
+      'A custom-trained YOLO26 model detects the ball frame by frame; EMA smoothing removes jitter and backfilling reconstructs frames the detector missed, producing a complete trajectory stored in PostgreSQL and consumed by Unity to build 3D replays.',
+    services: [
+      {
+        name: 'Extraction Service',
+        description: 'Tracks the ball through every frame and emits a complete trajectory.',
+        points: ['Custom-trained YOLO26 ball detector', 'EMA smoothing of the track', 'Backfill for missed frames', 'Output feeds analysis and Unity 3D replays'],
+      },
+    ],
+    models: ['YOLO26 (custom-trained)'],
+    tech: ['PyTorch', 'OpenCV', 'Ultralytics', 'PostgreSQL'],
+    metrics: [{ value: 97, suffix: '%', label: 'tracking accuracy' }],
+    architecture: {
+      nodes: [
+        { id: 'video', label: 'Net-practice video', kind: 'device' },
+        { id: 'ext', label: 'Extraction Service', sub: 'EMA · backfill', kind: 'service' },
+        { id: 'yolo', label: 'YOLO26', sub: 'custom-trained', kind: 'model' },
+        { id: 'pg', label: 'PostgreSQL', sub: 'trajectories', kind: 'store' },
+        { id: 'unity', label: 'Unity 3D replays', kind: 'client' },
+      ],
+      edges: [
+        { from: 'video', to: 'ext', label: 'frames' },
+        { from: 'ext', to: 'yolo', label: 'detect' },
+        { from: 'ext', to: 'pg', label: 'trajectory' },
+        { from: 'pg', to: 'unity' },
+      ],
+    },
+    cover: 'pitch',
+  },
+  {
+    slug: 'fusion',
+    name: 'FUSION',
+    tagline: 'GraphRAG chatbot that answers real-estate questions from a knowledge graph.',
+    kind: 'enterprise',
+    company: 'SenecaGlobal',
+    industry: 'Real Estate',
+    role: 'Technical Architect',
+    summary:
+      'AI-powered chatbot for real estate queries utilizing GraphRAG and entity disambiguation to resolve queries into Cypher text and generate accurate responses. Increased response accuracy by 25% and decreased query resolution time by 30%, leading to 20% increase in client retention.',
+    services: [],
+    tech: ['Python', 'GraphRAG', 'LLM', 'Neo4j', 'Cypher', 'FastAPI'],
+    metrics: [
+      { value: 25, prefix: '+', suffix: '%', label: 'response accuracy' },
+      { value: 30, prefix: '−', suffix: '%', label: 'query resolution time' },
+      { value: 20, prefix: '+', suffix: '%', label: 'client retention' },
+    ],
+    architecture: {
+      nodes: [
+        { id: 'user', label: 'Client query', kind: 'client' },
+        { id: 'api', label: 'Fusion API', sub: 'FastAPI', kind: 'service' },
+        { id: 'dis', label: 'Entity disambiguation', kind: 'service' },
+        { id: 'llm', label: 'LLM · GraphRAG', sub: 'text → Cypher', kind: 'model' },
+        { id: 'neo', label: 'Neo4j', sub: 'knowledge graph', kind: 'store' },
+      ],
+      edges: [
+        { from: 'user', to: 'api', bidirectional: true },
+        { from: 'api', to: 'dis' },
+        { from: 'dis', to: 'llm' },
+        { from: 'llm', to: 'neo', label: 'Cypher' },
+      ],
+    },
+    cover: 'graph',
+  },
+  {
+    slug: 'html-parser',
+    name: 'HTML Parser and Extractor',
+    tagline: 'GPT-4o turns messy HTML into structured data.',
+    kind: 'enterprise',
+    company: 'SenecaGlobal',
+    industry: 'Real Estate & Finance',
+    role: 'Technical Architect',
+    summary:
+      'Python-based tool for parsing and extracting structured data from HTML documents using GPT-4o model. Increased data processing speed by 30% and reduced manual extraction efforts by 40%. Successfully deployed in 15 client projects.',
+    services: [],
+    tech: ['Python', 'GPT-4o', 'LLM', 'HTML Parsing', 'FastAPI'],
+    metrics: [
+      { value: 30, prefix: '+', suffix: '%', label: 'processing speed' },
+      { value: 40, prefix: '−', suffix: '%', label: 'manual extraction' },
+      { value: 15, label: 'client projects' },
+    ],
+    cover: 'brackets',
+  },
+  {
+    slug: 'utility-framework',
+    name: 'Utility Framework',
+    tagline: 'One Python framework for logging, Terraform, Docker and notifications.',
+    kind: 'enterprise',
+    company: 'SenecaGlobal',
+    industry: 'Platform engineering',
+    role: 'Technical Architect',
+    summary:
+      'Centralized Python framework for managing logging, Terraform, Docker, and notifications. Reduced downtime by 40% and increased deployment speed by 30%. Enhanced team collaboration with notification integrations.',
+    services: [],
+    tech: ['Python', 'Terraform', 'Docker', 'AWS', 'FastAPI'],
+    metrics: [
+      { value: 40, prefix: '−', suffix: '%', label: 'downtime' },
+      { value: 30, prefix: '+', suffix: '%', label: 'deployment speed' },
+    ],
+    cover: 'layers',
+  },
+  {
+    slug: 'vendor-data-ingest',
+    name: 'Vendor Data Ingest',
+    tagline: 'Automated vendor data pipelines on Airflow and AWS.',
+    kind: 'enterprise',
+    company: 'SenecaGlobal',
+    industry: 'Real Estate & Finance',
+    role: 'Technical Architect',
+    summary: 'Automated data ingestion pipeline using Apache Airflow and AWS services, cutting down manual data entry by 60%.',
+    services: [],
+    tech: ['Python', 'Apache Airflow', 'AWS', 'MWAA', 'ETL'],
+    metrics: [{ value: 60, prefix: '−', suffix: '%', label: 'manual data entry' }],
+    architecture: {
+      nodes: [
+        { id: 'vendors', label: 'Vendor feeds', kind: 'device' },
+        { id: 'airflow', label: 'Airflow DAGs', sub: 'AWS MWAA', kind: 'service' },
+        { id: 'aws', label: 'AWS data stores', kind: 'store' },
+      ],
+      edges: [
+        { from: 'vendors', to: 'airflow', label: 'ingest' },
+        { from: 'airflow', to: 'aws', label: 'load' },
+      ],
+    },
+    cover: 'pipeline',
+  },
+  {
+    slug: 'tool-suite',
+    name: 'Tool Suite',
+    tagline: 'FastAPI, Vue and React tools unified as micro-frontends.',
+    kind: 'enterprise',
+    company: 'SenecaGlobal',
+    industry: 'Internal tooling',
+    role: 'Technical Architect',
+    summary:
+      'Collection of FastAPI, Vue, and React-based tools consolidated under micro-frontend architecture, improving team collaboration by 30%.',
+    services: [],
+    tech: ['FastAPI', 'Vue.js', 'React', 'Micro-frontend'],
+    metrics: [{ value: 30, prefix: '+', suffix: '%', label: 'team collaboration' }],
+    cover: 'grid',
+  },
+  {
+    slug: 'certificate-renewal',
+    name: 'Automatic Certificate Renewal',
+    tagline: 'Certificates that renew themselves — Django tool plus Go microservice.',
+    kind: 'enterprise',
+    company: 'HSBC',
+    industry: 'Banking',
+    role: 'Senior Software Engineer',
+    summary:
+      'Python Django tool for automatic certificate renewal and server refresh. Reduced manual server interventions by 70%. Golang microservice for periodic certificate assessment and renewal.',
+    services: [],
+    tech: ['Python', 'Django', 'Golang', 'Microservices', 'Automation'],
+    metrics: [{ value: 70, prefix: '−', suffix: '%', label: 'manual server interventions' }],
+    cover: 'certificate',
+  },
+]
