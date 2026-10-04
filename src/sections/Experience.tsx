@@ -26,7 +26,7 @@ export function Experience() {
       id="experience"
       eyebrow="Experience"
       title="Ten years, six companies, one through-line."
-      intro="From ETL automation in banking to architecting AI platforms in real estate."
+      intro="From ETL automation in banking to architecting GenAI solutions at EPAM."
     >
       <div ref={listRef} className="relative ml-1.5 sm:ml-2">
         <div aria-hidden className="absolute bottom-2 left-0 top-2 w-px bg-line" />

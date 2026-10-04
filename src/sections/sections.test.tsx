@@ -135,3 +135,10 @@ describe('Skills / Education / Contact', () => {
     expect(await screen.findByText(/Press ⌘C/)).toBeInTheDocument()
   })
 })
+
+describe('follow-ups', () => {
+  test('experience intro mentions GenAI at EPAM', () => {
+    wrap(<Experience />)
+    expect(screen.getByText('From ETL automation in banking to architecting GenAI solutions at EPAM.')).toBeInTheDocument()
+  })
+})

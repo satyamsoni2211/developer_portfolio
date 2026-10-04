@@ -53,6 +53,8 @@ export type Talk = {
   event: string
   year: number
   city?: string
+  /** ISO day of the session (YYYY-MM-DD); drives the "Upcoming" badge. */
+  date?: string
   url: string
 }
 

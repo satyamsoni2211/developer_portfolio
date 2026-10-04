@@ -5,7 +5,7 @@ import { profile } from './profile'
 import { projects } from './projects'
 import { SECTION_IDS } from './sections'
 import { skillCategories } from './skills'
-import { talks } from './talks'
+import { isUpcoming, talks } from './talks'
 
 describe('content data', () => {
   test('has 9 projects in the agreed order with unique slugs', () => {
@@ -75,5 +75,18 @@ describe('content data', () => {
 
   test('section ids are fixed', () => {
     expect(SECTION_IDS).toEqual(['hero', 'about', 'experience', 'projects', 'speaking', 'skills', 'education', 'contact'])
+  })
+
+  test('a dated talk is upcoming until its day has passed', () => {
+    const hk = talks[0]
+    expect(hk.date).toBe('2026-11-14')
+    expect(isUpcoming(hk, new Date('2026-10-05T12:00:00Z'))).toBe(true)
+    expect(isUpcoming(hk, new Date('2026-11-14T08:00:00Z'))).toBe(true)
+    expect(isUpcoming(hk, new Date('2026-11-16T00:00:00Z'))).toBe(false)
+    expect(isUpcoming(talks[1], new Date('2020-01-01T00:00:00Z'))).toBe(false)
+  })
+
+  test('website is the primary domain', () => {
+    expect(profile.website).toBe('https://www.satyamsoni.com')
   })
 })

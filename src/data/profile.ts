@@ -6,7 +6,7 @@ export const profile = {
   github: 'https://github.com/satyamsoni2211',
   linkedin: 'https://linkedin.com/in/-satyamsoni',
   x: 'https://x.com/_satyamsoni_',
-  website: 'https://satyamsoni.in',
+  website: 'https://www.satyamsoni.com',
   pitch: 'I design data platforms, AI systems and the teams that ship them.',
   metaDescription:
     'Satyam Soni is a Solution Architect with 10+ years of experience building data platforms, AI/LLM systems and computer-vision products across finance, telecom, real estate and manufacturing.',

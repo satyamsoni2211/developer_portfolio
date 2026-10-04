@@ -8,6 +8,7 @@ export const talks: Talk[] = [
     event: 'PyCon Hong Kong',
     year: 2026,
     city: 'Hong Kong',
+    date: '2026-11-14',
     url: 'https://pycon.hk/2026/en/speakers/satyam-soni/',
   },
   {
@@ -37,3 +38,10 @@ export const talks: Talk[] = [
     url: 'https://pyconf.hydpy.org/2022/#timetable',
   },
 ]
+
+const DAY_MS = 24 * 60 * 60 * 1000
+
+/** True until the end of the session's day (UTC); undated talks are in the past. */
+export function isUpcoming(talk: Talk, now: Date): boolean {
+  return talk.date !== undefined && now.getTime() < Date.parse(`${talk.date}T00:00:00Z`) + DAY_MS
+}
