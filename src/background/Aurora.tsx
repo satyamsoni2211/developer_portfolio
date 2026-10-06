@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from 'motion/react'
 import { useTheme } from '@/theme/ThemeProvider'
 import { createAurora, type AuroraRenderer } from './auroraGl'
-import { paletteFor, paletteGradient } from './palettes'
+import { LIGHT_FALLBACK_OPACITY, paletteFor, paletteGradient } from './palettes'
 
 /**
  * Fixed northern-lights backdrop. WebGL when available (started after first paint), otherwise a
- * static CSS gradient in the same palette. Vivid on dark, a soft dawn wash on light.
+ * static CSS gradient in the same palette. Vivid on dark, a saturated daylight aurora on light.
  */
 export function Aurora({ context }: { context: string }) {
   const { theme } = useTheme()
@@ -53,7 +53,7 @@ export function Aurora({ context }: { context: string }) {
       <div
         data-aurora="fallback"
         className="absolute inset-0 transition-opacity duration-700"
-        style={{ backgroundImage: paletteGradient(palette), opacity: webgl === 'on' ? 0 : dark ? 0.9 : 0.55 }}
+        style={{ backgroundImage: paletteGradient(palette, !dark), opacity: webgl === 'on' ? 0 : dark ? 0.9 : LIGHT_FALLBACK_OPACITY }}
       />
       {showCanvas && (
         <canvas

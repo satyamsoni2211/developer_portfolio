@@ -52,7 +52,7 @@ export default function ProjectPage() {
   const next = projects[(index + 1) % projects.length]
   const facts = [
     { label: 'Role', value: project.role },
-    { label: project.kind === 'freelance' ? 'Engagement' : 'Company', value: project.kind === 'freelance' ? 'Freelance' : project.company! },
+    { label: project.kind === 'collaboration' ? 'Engagement' : 'Company', value: project.kind === 'collaboration' ? 'Collaboration' : project.company! },
     { label: 'Industry', value: project.industry },
   ]
 
@@ -66,7 +66,7 @@ export default function ProjectPage() {
         <ProjectCover variant={project.cover} slug={project.slug} className="mt-6 aspect-[16/9] rounded-[28px] border border-line sm:aspect-[21/9]" />
 
         <Reveal className="mt-10">
-          <p className="text-sm font-semibold text-accent">{project.kind === 'freelance' ? 'Freelance' : project.company}</p>
+          <p className="text-sm font-semibold text-accent">{project.kind === 'collaboration' ? 'Collaboration' : project.company}</p>
           <h1 className="mt-2 text-title font-semibold">{project.name}</h1>
           <p className="mt-4 max-w-3xl text-xl text-muted sm:text-2xl">{project.tagline}</p>
         </Reveal>

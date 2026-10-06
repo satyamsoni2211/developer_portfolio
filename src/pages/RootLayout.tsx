@@ -4,8 +4,10 @@ import { Aurora } from '@/background/Aurora'
 import { Footer } from '@/components/Footer'
 import { Nav } from '@/components/Nav'
 import { SECTION_IDS } from '@/data/sections'
+import { StarTrail } from '@/effects/StarTrail'
 import { GuideLayer, GuideNavButton, GuideSkipLink } from '@/guide/GuideLayer'
 import { GuideProvider } from '@/guide/GuideProvider'
+import { SearchButton, SearchProvider } from '@/search/SearchProvider'
 import { startSmoothScroll } from '@/lib/scroll'
 import { useActiveSection } from '@/lib/useActiveSection'
 
@@ -19,19 +21,30 @@ export function RootLayout() {
 
   return (
     <GuideProvider context={context}>
-      <Aurora context={context} />
-      <a
-        href="#main"
-        className="sr-only z-[70] rounded-full bg-accent-fill px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-3"
-      >
-        Skip to content
-      </a>
-      <GuideSkipLink />
-      <Nav active={pathname === '/' ? active : null} extra={<GuideNavButton />} />
-      <Outlet />
-      <Footer />
-      <GuideLayer />
-      <ScrollRestoration />
+      <SearchProvider>
+        <Aurora context={context} />
+        <StarTrail />
+        <a
+          href="#main"
+          className="sr-only z-[70] rounded-full bg-accent-fill px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-3"
+        >
+          Skip to content
+        </a>
+        <GuideSkipLink />
+        <Nav
+          active={pathname === '/' ? active : null}
+          extra={
+            <>
+              <SearchButton />
+              <GuideNavButton />
+            </>
+          }
+        />
+        <Outlet />
+        <Footer />
+        <GuideLayer />
+        <ScrollRestoration />
+      </SearchProvider>
     </GuideProvider>
   )
 }

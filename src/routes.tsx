@@ -1,4 +1,4 @@
-import type { RouteObject } from 'react-router'
+import { Navigate, type RouteObject } from 'react-router'
 import Home from './pages/Home'
 import { NotFound } from './pages/NotFound'
 import { RootLayout } from './pages/RootLayout'
@@ -21,6 +21,7 @@ export const routes: RouteObject[] = [
         path: 'projects/:slug',
         lazy: async () => ({ Component: (await import('./pages/ProjectPage')).default }),
       },
+      { path: 'contact', element: <Navigate to="/" state={{ scrollTo: 'contact' }} replace /> },
       { path: '*', element: <NotFound /> },
     ],
   },

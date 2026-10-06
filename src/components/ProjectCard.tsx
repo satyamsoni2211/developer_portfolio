@@ -11,7 +11,7 @@ export function metricText(m: Metric): string {
 }
 
 export function ProjectCard({ project }: { project: Project }) {
-  const freelance = project.kind === 'freelance'
+  const collab = project.kind === 'collaboration'
   const headline = project.metrics[0]
   return (
     <Link
@@ -19,11 +19,11 @@ export function ProjectCard({ project }: { project: Project }) {
       viewTransition
       className="card group flex h-full flex-col overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
     >
-      <ProjectCover variant={project.cover} slug={project.slug} className={freelance ? 'aspect-[4/3]' : 'aspect-[16/10]'} />
+      <ProjectCover variant={project.cover} slug={project.slug} className={collab ? 'aspect-[4/3]' : 'aspect-[16/10]'} />
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-center gap-2 text-xs font-medium">
-          <span className={cn('rounded-full px-2.5 py-1', freelance ? 'bg-accent/10 text-accent' : 'bg-fg/[.06] text-muted')}>
-            {freelance ? 'Freelance' : project.company}
+          <span className={cn('rounded-full px-2.5 py-1', collab ? 'bg-accent/10 text-accent' : 'bg-fg/[.06] text-muted')}>
+            {collab ? 'Collaboration' : project.company}
           </span>
           <span className="text-muted">{project.industry}</span>
         </div>

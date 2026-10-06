@@ -42,7 +42,7 @@ export function Nav({ active, extra }: { active: string | null; extra?: ReactNod
           <span className="sr-only"> Satyam Soni — home</span>
         </Link>
 
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-1 lg:flex">
           {NAV_SECTIONS.map((s) => (
             <li key={s.id}>
               <button
@@ -69,7 +69,7 @@ export function Nav({ active, extra }: { active: string | null; extra?: ReactNod
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Close menu' : 'Open menu'}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-muted hover:bg-fg/[.06] hover:text-fg md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-muted hover:bg-fg/[.06] hover:text-fg lg:hidden"
           >
             {open ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
           </button>
@@ -83,7 +83,7 @@ export function Nav({ active, extra }: { active: string | null; extra?: ReactNod
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-t border-line px-4 md:hidden"
+            className="overflow-hidden border-t border-line px-4 lg:hidden"
           >
             {NAV_SECTIONS.map((s) => (
               <li key={s.id}>

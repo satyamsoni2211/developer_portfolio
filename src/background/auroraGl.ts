@@ -51,11 +51,12 @@ void main() {
   col *= smoothstep(0.05, 0.5, uv.y);
   vec3 W = vec3(0.2126, 0.7152, 0.0722);
   if (u_light > 0.5) {
-    // Dawn wash: tint the page background toward the ribbon hue, then lift it back so the page never
-    // drops below u_minLum relative luminance — dark text stays readable wherever the ribbons drift.
+    // Daylight aurora: saturate quickly so the ribbons read as colour rather than haze, then lift
+    // any pixel that falls under u_minLum back toward the page so dark text stays readable.
     float m = max(max(col.r, col.g), col.b);
     vec3 tint = m > 0.0 ? col / m : vec3(0.0);
-    vec3 outc = mix(u_bg, tint, clamp(m, 0.0, 1.0) * 0.55);
+    float k = 1.0 - exp(-m * 2.4);
+    vec3 outc = mix(u_bg, tint, k * 0.9);
     float L = dot(pow(outc, vec3(2.2)), W);
     float Lbg = dot(pow(u_bg, vec3(2.2)), W);
     outc = mix(outc, u_bg, clamp((u_minLum - L) / max(Lbg - L, 1e-4), 0.0, 1.0));
@@ -85,7 +86,7 @@ const SCALE = 0.5 // render at half resolution; the aurora is soft anyway
 const FRAME_MS = 1000 / 30
 /** Text-contrast budgets (WCAG relative luminance), pinned by contrast.test.ts against the text tokens. */
 export const DARK_MAX_LUM = 0.04 // brightest the aurora may get behind text on the night sky
-export const LIGHT_MIN_LUM = 0.84 // darkest the dawn wash may make the page
+export const LIGHT_MIN_LUM = 0.66 // darkest the daylight aurora may make the page
 
 function compile(gl: WebGLRenderingContext, type: number, src: string) {
   const s = gl.createShader(type)!

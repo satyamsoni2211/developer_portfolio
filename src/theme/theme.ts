@@ -1,10 +1,10 @@
-import { safeGet, safeRemove, safeSet } from '@/lib/storage'
+import { safeGet, safeSet } from '@/lib/storage'
 
 export type ThemePref = 'system' | 'light' | 'dark'
 export type Theme = 'light' | 'dark'
 
 const KEY = 'theme'
-const ORDER: ThemePref[] = ['system', 'light', 'dark']
+const ORDER: ThemePref[] = ['dark', 'light', 'system']
 
 export function resolveTheme(pref: ThemePref, systemDark: boolean): Theme {
   if (pref === 'system') return systemDark ? 'dark' : 'light'
@@ -17,10 +17,9 @@ export function nextPref(pref: ThemePref): ThemePref {
 
 export function readPref(): ThemePref {
   const value = safeGet(KEY)
-  return value === 'light' || value === 'dark' ? value : 'system'
+  return value === 'light' || value === 'dark' || value === 'system' ? value : 'dark'
 }
 
 export function writePref(pref: ThemePref): void {
-  if (pref === 'system') safeRemove(KEY)
-  else safeSet(KEY, pref)
+  safeSet(KEY, pref)
 }

@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest'
+import { TIPS } from '@/guide/tips'
 import { education } from './education'
 import { experience } from './experience'
 import { profile } from './profile'
@@ -15,8 +16,8 @@ describe('content data', () => {
     ])
   })
 
-  test('first three projects are freelance, the rest enterprise', () => {
-    expect(projects.slice(0, 3).every((p) => p.kind === 'freelance')).toBe(true)
+  test('first three projects are collaborations, the rest enterprise', () => {
+    expect(projects.slice(0, 3).every((p) => p.kind === 'collaboration')).toBe(true)
     expect(projects.slice(3).every((p) => p.kind === 'enterprise' && p.company)).toBe(true)
   })
 
@@ -40,7 +41,7 @@ describe('content data', () => {
     }
   })
 
-  test('freelance projects carry their services and models', () => {
+  test('collaboration projects carry their services and models', () => {
     const bySlug = Object.fromEntries(projects.map((p) => [p.slug, p]))
     expect(bySlug['defect-detection'].services.map((s) => s.name)).toEqual(['Camera Service', 'Defect Backend', 'Defect Dashboard'])
     expect(bySlug['stryve'].services.map((s) => s.name)).toEqual(['Stryve Backend', 'Pose Extraction Service'])
@@ -74,7 +75,10 @@ describe('content data', () => {
   })
 
   test('section ids are fixed', () => {
-    expect(SECTION_IDS).toEqual(['hero', 'about', 'experience', 'projects', 'speaking', 'skills', 'education', 'contact'])
+    expect(SECTION_IDS).toEqual([
+      'hero', 'about', 'experience', 'projects', 'opensource', 'writing',
+      'speaking', 'recommendations', 'skills', 'education', 'contact',
+    ])
   })
 
   test('a dated talk is upcoming until its day has passed', () => {
@@ -88,5 +92,13 @@ describe('content data', () => {
 
   test('website is the primary domain', () => {
     expect(profile.website).toBe('https://www.satyamsoni.com')
+  })
+
+  test('the word freelance appears nowhere in the content', () => {
+    expect(JSON.stringify({ profile, experience, projects, TIPS })).not.toMatch(/freelanc/i)
+  })
+
+  test('collaboration roles use the agreed titles', () => {
+    expect(projects.slice(0, 3).map((p) => p.role)).toEqual(['Technical partner', 'Lead engineer', 'Technical partner'])
   })
 })

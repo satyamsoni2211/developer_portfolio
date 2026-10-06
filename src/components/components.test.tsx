@@ -3,6 +3,7 @@ import { afterEach, describe, expect, test, vi } from 'vitest'
 import { copyText } from '@/lib/clipboard'
 import { CountUp, formatMetric } from './CountUp'
 import { Reveal } from './Reveal'
+import { itemVariants } from './revealVariants'
 import { SocialLinks } from './SocialLinks'
 import { ToastProvider, useToast } from './Toast'
 
@@ -66,5 +67,16 @@ describe('SocialLinks', () => {
     const x = screen.getByRole('link', { name: 'X (Twitter)' })
     expect(x).toHaveAttribute('href', 'https://x.com/_satyamsoni_')
     expect(x).toHaveAttribute('target', '_blank')
+  })
+})
+
+describe('itemVariants', () => {
+  test.each([false, true])('clears the filter once shown so glass cards can blur (pop=%s)', (pop) => {
+    const shown = itemVariants(false, 0, pop).shown as { transitionEnd?: { filter?: string } }
+    expect(shown.transitionEnd?.filter).toBe('none')
+  })
+
+  test('reduced motion never touches filter', () => {
+    for (const v of Object.values(itemVariants(true))) expect(v).not.toHaveProperty('filter')
   })
 })

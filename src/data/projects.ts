@@ -5,9 +5,9 @@ export const projects: Project[] = [
     slug: 'defect-detection',
     name: 'Defect Detection',
     tagline: 'Vision-based defect analysis for differential gears.',
-    kind: 'freelance',
+    kind: 'collaboration',
     industry: 'Manufacturing',
-    role: 'Solo developer',
+    role: 'Technical partner',
     summary:
       'An in-house inspection system that photographs differential gears with high-resolution cameras, runs a YOLO11s detector and gives the operator an annotated pass/fail verdict in under five seconds.',
     problem:
@@ -61,9 +61,9 @@ export const projects: Project[] = [
     slug: 'stryve',
     name: 'Stryve',
     tagline: "Guided workouts that check your pose against your trainer's.",
-    kind: 'freelance',
+    kind: 'collaboration',
     industry: 'Fitness',
-    role: 'Lead developer',
+    role: 'Lead engineer',
     summary:
       "A guided-workout platform where trainees follow a trainer's recorded movements and get their posture checked against the trainer's pose.",
     problem: "Trainees working out on their own can't tell whether their form matches the trainer's.",
@@ -109,9 +109,9 @@ export const projects: Project[] = [
     slug: 'crickbuzz',
     name: 'CrickBuzz',
     tagline: 'Ball-trajectory extraction from cricket net-practice videos.',
-    kind: 'freelance',
+    kind: 'collaboration',
     industry: 'Sports analytics',
-    role: 'Solo developer',
+    role: 'Technical partner',
     summary:
       'A computer-vision pipeline that extracts the full ball trajectory from net-practice videos, for analysis and for building 3D replays in Unity.',
     problem: 'A small, fast ball is easily lost between frames, leaving gaps that break downstream analysis and 3D reconstruction.',

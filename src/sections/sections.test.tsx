@@ -65,7 +65,7 @@ describe('Experience', () => {
 describe('Projects', () => {
   test('filterProjects', () => {
     expect(filterProjects(projects, 'all')).toHaveLength(9)
-    expect(filterProjects(projects, 'freelance').map((p) => p.slug)).toEqual(['defect-detection', 'stryve', 'crickbuzz'])
+    expect(filterProjects(projects, 'collaboration').map((p) => p.slug)).toEqual(['defect-detection', 'stryve', 'crickbuzz'])
     expect(filterProjects(projects, 'enterprise')).toHaveLength(6)
   })
 
@@ -82,14 +82,20 @@ describe('Projects', () => {
     )
     expect(screen.getByRole('link', { name: /Stryve/ })).toHaveAttribute('href', '/projects/stryve')
     expect(screen.getAllByRole('link', { name: /case study/i })).toHaveLength(9)
-    const freelance = screen.getByRole('button', { name: 'Freelance' })
-    fireEvent.click(freelance)
-    expect(freelance).toHaveAttribute('aria-pressed', 'true')
+    const collab = screen.getByRole('button', { name: 'Collaborations' })
+    fireEvent.click(collab)
+    expect(collab).toHaveAttribute('aria-pressed', 'true')
     await waitFor(() => expect(screen.queryByRole('link', { name: /FUSION/ })).not.toBeInTheDocument(), { timeout: 3000 })
   })
 })
 
 describe('Speaking', () => {
+  test('groups workshops under year headings, newest first', () => {
+    wrap(<Speaking />)
+    expect(screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)).toEqual(['2026 — Speaking', '2025 — Speaking', '2022 — Speaking'])
+    expect(screen.getByRole('heading', { level: 4, name: 'Why Your FastAPI Is Not Fast' })).toBeInTheDocument()
+  })
+
   test('renders four external talk links under the heading', () => {
     wrap(<Speaking />)
     expect(screen.getByRole('heading', { level: 2, name: 'Teaching what I build.' })).toBeInTheDocument()

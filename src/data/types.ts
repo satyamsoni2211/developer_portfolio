@@ -22,7 +22,7 @@ export type Project = {
   slug: string
   name: string
   tagline: string
-  kind: 'freelance' | 'enterprise'
+  kind: 'collaboration' | 'enterprise'
   company?: string
   industry: string
   role: string
@@ -59,3 +59,35 @@ export type Talk = {
 }
 
 export type SkillCategory = { id: string; label: string; items: string[] }
+
+export type OpenSourcePackage = {
+  name: string
+  summary: string
+  /** Year of the latest release; drives year grouping. */
+  year: number
+  /** ISO day of the latest release on PyPI (YYYY-MM-DD). */
+  released: string
+  pypi: string
+  repo?: string
+}
+
+export type Post = {
+  title: string
+  blurb: string
+  platform: 'dev.to' | 'LinkedIn' | 'X'
+  /** ISO day published (YYYY-MM-DD). */
+  published: string
+  year: number
+  url: string
+}
+
+export type Recommendation = {
+  name: string
+  /** Their headline, e.g. "Engineering Manager, Acme". */
+  title: string
+  /** How they know Satyam, e.g. "Managed Satyam directly". */
+  relationship: string
+  /** ISO day the recommendation was given (YYYY-MM-DD). */
+  date?: string
+  text: string
+}

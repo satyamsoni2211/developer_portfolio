@@ -9,7 +9,7 @@ import type { Project } from '@/data/types'
 import { cn } from '@/lib/utils'
 import { springs } from '@/theme/motion'
 
-export type ProjectFilter = 'all' | 'freelance' | 'enterprise'
+export type ProjectFilter = 'all' | 'collaboration' | 'enterprise'
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function filterProjects(list: Project[], filter: ProjectFilter): Project[] {
@@ -18,7 +18,7 @@ export function filterProjects(list: Project[], filter: ProjectFilter): Project[
 
 const FILTERS: { id: ProjectFilter; label: string }[] = [
   { id: 'all', label: 'All' },
-  { id: 'freelance', label: 'Freelance' },
+  { id: 'collaboration', label: 'Collaborations' },
   { id: 'enterprise', label: 'Enterprise' },
 ]
 
@@ -31,10 +31,10 @@ export function Projects() {
       id="projects"
       eyebrow="Projects"
       title="Things I've designed and shipped."
-      intro="Three recent freelance builds in computer vision, plus enterprise platforms delivered at SenecaGlobal and HSBC."
+      intro="Three recent computer-vision collaborations, plus enterprise platforms delivered at SenecaGlobal and HSBC."
     >
       <Reveal>
-        <div role="group" aria-label="Filter projects" className="inline-flex rounded-full bg-fg/[.05] p-1">
+        <div role="group" aria-label="Filter projects" className="glass inline-flex rounded-full border border-line p-1">
           {FILTERS.map((f) => (
             <button
               key={f.id}

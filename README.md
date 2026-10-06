@@ -10,7 +10,7 @@ Personal portfolio of **Satyam Soni, Solution Architect** — an Apple-inspired,
 
 - Light & dark themes that follow your OS, with a manual override
 - Scroll-driven reveals, parallax hero, count-up stats, animated experience timeline
-- 9 project case studies (3 freelance computer-vision builds + 6 enterprise platforms) with animated architecture diagrams
+- 9 project case studies (3 computer-vision collaborations + 6 enterprise platforms) with animated architecture diagrams
 - Card → case-study morph using the View Transitions API
 - Guide character: head and eyes track the cursor, trails it as a companion, offers section tips, docks on touch devices, respects *Reduce motion*
 - Fast: lazy-loaded routes, ~100 KB of character art, no web fonts
@@ -51,6 +51,17 @@ npm run assets
 ```
 
 Crop boxes and eye positions are constants at the top of `scripts/build-character.mjs`.
+
+## Contact form
+
+The contact form posts to [Web3Forms](https://web3forms.com), which emails each message to the address the access key was created for.
+
+The access key is read from `VITE_WEB3FORMS_KEY`.
+
+1. Local: copy `.env.example` to `.env.local` (git-ignored) and set the key.
+2. Production: add `VITE_WEB3FORMS_KEY` to the Vercel project's environment variables and redeploy.
+
+Without a key the form still works: submitting opens a pre-filled email draft instead.
 
 ## Deploy
 

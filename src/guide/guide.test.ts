@@ -56,7 +56,7 @@ describe('isAvoidTarget', () => {
 
 describe('tips', () => {
   test('section and project tips, with a project default', () => {
-    expect(tipFor('projects')).toMatch(/freelance/i)
+    expect(tipFor('projects')).toMatch(/collaborations/i)
     expect(tipFor('project:stryve')).toMatch(/MediaPipe/)
     expect(tipFor('project:tool-suite')).toMatch(/architecture/i)
     expect(tipFor('nowhere')).toBeNull()

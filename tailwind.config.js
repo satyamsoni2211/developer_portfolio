@@ -10,6 +10,7 @@ export default {
         muted: 'rgb(var(--fg-muted) / <alpha-value>)',
         accent: 'rgb(var(--accent) / <alpha-value>)',
         'accent-fill': 'rgb(var(--accent-fill) / <alpha-value>)',
+        danger: 'rgb(var(--danger) / <alpha-value>)',
         line: 'var(--line)',
       },
       fontFamily: {

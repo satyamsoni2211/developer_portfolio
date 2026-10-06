@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { Check, Copy, Mail } from 'lucide-react'
 import { buttonClass } from '@/components/Button'
+import { ContactForm } from '@/components/ContactForm'
 import { Reveal } from '@/components/Reveal'
 import { SocialLinks } from '@/components/SocialLinks'
 import { useToast } from '@/components/Toast'
@@ -33,7 +34,11 @@ export function Contact() {
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-xl text-muted">{profile.contactBlurb}</p>
         </Reveal>
-        <Reveal className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <Reveal className="mx-auto mt-12 max-w-2xl">
+          <ContactForm />
+        </Reveal>
+        <p className="mt-10 text-sm text-muted">Prefer your own mail client?</p>
+        <Reveal className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a href={`mailto:${profile.email}`} className={buttonClass('primary')}>
             <Mail aria-hidden className="h-4 w-4" />
             <span ref={emailRef}>{profile.email}</span>

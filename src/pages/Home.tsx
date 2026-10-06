@@ -8,9 +8,12 @@ import { Contact } from '@/sections/Contact'
 import { Education } from '@/sections/Education'
 import { Experience } from '@/sections/Experience'
 import { Hero } from '@/sections/Hero'
+import { OpenSource } from '@/sections/OpenSource'
 import { Projects } from '@/sections/Projects'
+import { Recommendations } from '@/sections/Recommendations'
 import { Skills } from '@/sections/Skills'
 import { Speaking } from '@/sections/Speaking'
+import { Writing } from '@/sections/Writing'
 
 export default function Home() {
   const location = useLocation()
@@ -29,7 +32,10 @@ export default function Home() {
       <About />
       <Experience />
       <Projects />
+      <OpenSource />
+      <Writing />
       <Speaking />
+      <Recommendations />
       <Skills />
       <Education />
       <Contact />

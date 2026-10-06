@@ -17,3 +17,9 @@ test('sitemap lists home and every project', () => {
   expect(sitemap).toContain('<loc>https://www.satyamsoni.com/</loc>')
   for (const p of projects) expect(sitemap).toContain(`<loc>https://www.satyamsoni.com/projects/${p.slug}</loc>`)
 })
+
+test('inline theme script defaults to dark and only follows the OS for an explicit system pref', () => {
+  const script = html.slice(html.indexOf('<script>'), html.indexOf('</script>'))
+  expect(script).toContain("=== 'light'")
+  expect(script).toContain("=== 'system'")
+})
